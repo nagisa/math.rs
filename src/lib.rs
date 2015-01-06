@@ -23,5 +23,8 @@ pub mod dim;
 // Copy sign
 pub mod sign;
 
+// Round, Ceil, Floor, Truncate
+pub mod rounding;
+
 //
 mod pow;
