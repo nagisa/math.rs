@@ -3,28 +3,28 @@ use libc::types::os::arch::c99;
 use libc::types::os::arch::c95;
 
 #[no_mangle]
-pub fn lround(i : f64) -> c95::c_long {
+pub extern fn lround(i : f64) -> c95::c_long {
     0
 }
 
 #[no_mangle]
-pub fn lroundf(i : f32) -> c95::c_long {
+pub extern fn lroundf(i : f32) -> c95::c_long {
     0
 }
 
 #[no_mangle]
-pub fn llround(i : f64) -> c99::c_longlong {
+pub extern fn llround(i : f64) -> c99::c_longlong {
     0
 }
 
 #[no_mangle]
-pub fn llroundf(i : f32) -> c99::c_longlong {
+pub extern fn llroundf(i : f32) -> c99::c_longlong {
     0
 }
 
 /// Rounds the number away from zero.
 #[no_mangle]
-pub fn round(i : f64) -> f64 {
+pub extern fn round(i : f64) -> f64 {
     // Port of glibc libm implementation.
     let mut bits : u64 = unsafe { transmute(i) };
     let high : u32 = (bits >> 32) as u32;
@@ -70,7 +70,7 @@ pub fn round(i : f64) -> f64 {
 }
 
 #[no_mangle]
-pub fn roundf(i : f32) -> f32 {
+pub extern fn roundf(i : f32) -> f32 {
     let mut bits : u32 = unsafe { transmute(i) };
     let exp = (((bits as i32) >> 23) & 0xff) - 0x7f;
     if exp < 0 {
@@ -98,32 +98,32 @@ pub fn roundf(i : f32) -> f32 {
 }
 
 #[no_mangle]
-pub fn floor(i : f64) -> f64 {
+pub extern fn floor(i : f64) -> f64 {
     0.0
 }
 
 #[no_mangle]
-pub fn floorf(i : f32) -> f32 {
+pub extern fn floorf(i : f32) -> f32 {
     0.0
 }
 
 #[no_mangle]
-pub fn ceil(i : f64) -> f64 {
+pub extern fn ceil(i : f64) -> f64 {
     0.0
 }
 
 #[no_mangle]
-pub fn ceilf(i : f32) -> f32 {
+pub extern fn ceilf(i : f32) -> f32 {
     0.0
 }
 
 #[no_mangle]
-pub fn trunc(i : f64) -> f64 {
+pub extern fn trunc(i : f64) -> f64 {
     0.0
 }
 
 #[no_mangle]
-pub fn truncf(i : f32) -> f32 {
+pub extern fn truncf(i : f32) -> f32 {
     0.0
 }
 

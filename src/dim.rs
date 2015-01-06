@@ -2,7 +2,7 @@
 ///
 /// Behaviour mismatch: Does not set ERANGE error on overflow as libm does.
 #[no_mangle]
-extern fn fdim(l: f64, r: f64) -> f64 {
+pub extern fn fdim(l: f64, r: f64) -> f64 {
     if l <= r {
         return 0.0
     }
@@ -13,7 +13,7 @@ extern fn fdim(l: f64, r: f64) -> f64 {
 ///
 /// Behaviour mismatch: Does not set ERANGE error on overflow as libm does.
 #[no_mangle]
-extern fn fdimf(l : f32, r : f32) -> f32 {
+pub extern fn fdimf(l : f32, r : f32) -> f32 {
     if l <= r {
         return 0.0
     }

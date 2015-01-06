@@ -2,7 +2,7 @@ use core::intrinsics::transmute;
 
 /// Absolute value of IEEE 754 64-bit floating-point number
 #[no_mangle]
-extern fn fabs(i : f64) -> f64 {
+pub extern fn fabs(i : f64) -> f64 {
     unsafe {
         let bits : u64 = transmute(i);
         transmute(bits & 0x7fff_ffff_ffff_ffff)
@@ -11,7 +11,7 @@ extern fn fabs(i : f64) -> f64 {
 
 /// Absolute value of IEEE 754 32-bit floating-point number
 #[no_mangle]
-extern fn fabsf(i : f32) -> f32 {
+pub extern fn fabsf(i : f32) -> f32 {
     unsafe {
         let bits : u32 = transmute(i);
         transmute(bits & 0x7fff_ffff)

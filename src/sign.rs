@@ -2,7 +2,7 @@ use core::intrinsics::transmute;
 
 /// Return a value whose absolute value matches `l` and sign matches `r`
 #[no_mangle]
-extern fn copysign(l: f64, r: f64) -> f64 {
+pub extern fn copysign(l: f64, r: f64) -> f64 {
     unsafe {
         let bitsl : u64 = transmute(l);
         let bitsr : u64 = transmute(r);
@@ -12,7 +12,7 @@ extern fn copysign(l: f64, r: f64) -> f64 {
 
 /// Return a value whose absolute value matches `l` and sign matches `r`
 #[no_mangle]
-extern fn copysignf(l : f32, r : f32) -> f32 {
+pub extern fn copysignf(l : f32, r : f32) -> f32 {
     unsafe {
         let bitsl : u32 = transmute(l);
         let bitsr : u32 = transmute(r);
