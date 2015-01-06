@@ -1,0 +1,3 @@
+# Software implementations of libm functions in Rust
+
+This is supposed to be linked into Rust binaries on systems where libm is not available.
