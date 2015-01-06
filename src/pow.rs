@@ -1,4 +1,3 @@
-use core::slice::SliceExt;
 use core::num::Float;
 
 pub fn ieee754_pow64(x : f64, y: f64) -> f64 {
