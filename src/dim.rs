@@ -1,7 +1,3 @@
-use core::num::Float;
-use core::f32;
-use core::f64;
-
 /// Positive difference of two IEEE 754 64-bit floating-point numbers
 ///
 /// Behaviour mismatch: Does not set ERANGE error on overflow as libm does.
@@ -26,6 +22,8 @@ extern fn fdimf(l : f32, r : f32) -> f32 {
 
 #[test]
 fn dim_f32() {
+    use core::num::Float;
+    use core::f32;
     assert_eq!(fdimf(10.0, 20.0), 0.0);
     assert_eq!(fdimf(20.0, -20.0), 40.0);
     assert!(fdimf(f32::NAN, 0.0).is_nan());
@@ -37,6 +35,8 @@ fn dim_f32() {
 
 #[test]
 fn dim_f64() {
+    use core::num::Float;
+    use core::f64;
     assert_eq!(fdim(10.0, 20.0), 0.0);
     assert_eq!(fdim(20.0, -20.0), 40.0);
     assert_eq!(fdim(1E100, -1E100), 2E100);

@@ -17,8 +17,11 @@ extern crate std;
 
 // Absolute values
 pub mod abs;
-// Possitive difference
+// Positive difference
 pub mod dim;
+
+// Copy sign
+pub mod sign;
 
 //
 mod pow;
