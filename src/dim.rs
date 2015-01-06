@@ -30,7 +30,7 @@ fn dim_f32() {
     assert!(fdimf(1.0, f32::NAN).is_nan());
 
     // BEHAVIOUR MISMATCH: see documentation
-    assert_eq!(fdimf(1E40, -1E40), f32::INFINITY);
+    assert_eq!(fdimf(f32::MAX_VALUE, f32::MIN_VALUE), f32::INFINITY);
 }
 
 #[test]
@@ -46,5 +46,5 @@ fn dim_f64() {
     assert_eq!(fdim(f64::NEG_INFINITY, f64::INFINITY), 0.0);
 
     // BEHAVIOUR MISMATCH: see documentation
-    assert_eq!(fdim(1E310, -1E310), f64::INFINITY);
+    assert_eq!(fdim(f64::MAX_VALUE, f64::MIN_VALUE), f64::INFINITY);
 }
