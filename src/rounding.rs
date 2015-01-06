@@ -13,12 +13,12 @@ pub fn lroundf(i : f32) -> c95::c_long {
 }
 
 #[no_mangle]
-pub fn llround(i : f64) -> c95::c_long {
+pub fn llround(i : f64) -> c99::c_longlong {
     0
 }
 
 #[no_mangle]
-pub fn llroundf(i : f32) -> c95::c_long {
+pub fn llroundf(i : f32) -> c99::c_longlong {
     0
 }
 
