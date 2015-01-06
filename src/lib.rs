@@ -12,5 +12,7 @@ extern crate core;
 // #[phase(plugin, link)]
 // extern crate std;
 
+mod abs;
+
 mod pow;
 mod utils;
