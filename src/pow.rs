@@ -1,6 +1,5 @@
 use core::slice::SliceExt;
 use core::num::Float;
-use utils::AsLowEndianSlice;
 
 pub fn ieee754_pow64(x : f64, y: f64) -> f64 {
     // Simple cases

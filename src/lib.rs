@@ -1,6 +1,6 @@
 #![crate_name="math"]
 #![crate_type="rlib"]
-// #![no_std]
+#![no_std]
 #![experimental]
 
 #![feature(phase)]
@@ -8,11 +8,15 @@
 #[phase(plugin, link)]
 extern crate core;
 
-// #[cfg(test)]
-// #[phase(plugin, link)]
-// extern crate std;
+// For types
+extern crate libc;
 
-mod abs;
+#[cfg(test)]
+#[phase(plugin, link)]
+extern crate std;
 
+// Absolute values
+pub mod abs;
+
+//
 mod pow;
-mod utils;
