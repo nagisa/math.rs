@@ -1,20 +1,13 @@
-use utils::{AsBits,Bits};
+//! Rounding operations on IEEE 754 floating-point numbers.
 
+use utils::{AsBits, Bits};
+use utils::{F32_SIGN_MASK, F64_SIGN_MASK, F32_MANTISSA_MASK, F64_MANTISSA_MASK};
 
-// TODO: get rid on all these
-use core::mem::transmute;
 use core::mem::size_of;
+// TODO: get rid on all these
 use libc::types::os::arch::c99;
 use libc::types::os::arch::c95;
-use core::option::Option;
-use core::option::Option::{Some,None};
 
-
-
-const F64_SIGN_MASK : u64 = 1 << 63;
-const F32_SIGN_MASK : u32 = 1 << 31;
-const F32_MANTISSA_MASK : u32 = 0x007F_FFFF;
-const F64_MANTISSA_MASK : u64 = 0x000F_FFFF_FFFF_FFFF;
 
 /// Round the 32-bit floating-point number away from zero.
 #[no_mangle]

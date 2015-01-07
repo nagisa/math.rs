@@ -39,12 +39,5 @@ pub mod rounding;
 mod utils;
 
 
-
 // // Positive difference
 // pub mod dim;
-//
-// // Copy sign
-// pub mod sign;
-
-// mod pow;
-

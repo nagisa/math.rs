@@ -1,8 +1,6 @@
-/// Operations on IEEE 754 floating-point number sign.
+//! Operations on IEEE 754 floating-point number sign.
 use utils::{AsBits, Bits};
-
-const F64_SIGN_MASK : u64 = 1 << 63;
-const F32_SIGN_MASK : u32 = 1 << 31;
+use utils::{F32_SIGN_MASK, F64_SIGN_MASK};
 
 /// Absolute value of IEEE 754 32-bit floating-point number
 #[no_mangle]

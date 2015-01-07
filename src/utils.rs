@@ -51,5 +51,9 @@ impl Bits<f64> for u64 {
     }
 }
 
-
+// Common constants
+pub const F64_SIGN_MASK : u64 = 1 << 63;
+pub const F32_SIGN_MASK : u32 = 1 << 31;
+pub const F32_MANTISSA_MASK : u32 = 0x007F_FFFF;
+pub const F64_MANTISSA_MASK : u64 = 0x000F_FFFF_FFFF_FFFF;
 
