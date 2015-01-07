@@ -28,19 +28,42 @@ extern crate libc;
 
 
 // Reexport everything
-pub use signops::*;
-pub use rounding::*;
-pub use arithmetic::*;
+pub use abs::*;
+pub use copysign::*;
+pub use round::*;
+pub use floor::*;
+pub use ceil::*;
+pub use trunc::*;
+pub use lround::*;
+pub use llround::*;
+pub use dim::*;
+pub use ma::*;
+pub use logb::*;
+pub use ilogb::*;
+pub use min::*;
+pub use max::*;
 
-// The modules are split and grouped by functionality, not data type size, architecture or any
-// other arbitrary property.
+// The modules are split and grouped by function class.
 //
-// Operations on signs (absolute, copysign, …).
-pub mod signops;
-// Rounding operations (round, floor, ceil, truncate, …).
-pub mod rounding;
-// Simple arithmetic operations (positive difference, modulo operation, min, max, …).
-pub mod arithmetic;
+// Operations on signs:
+pub mod abs;
+pub mod copysign;
+// Rounding operations:
+pub mod round;
+pub mod floor;
+pub mod ceil;
+pub mod trunc;
+pub mod lround;
+pub mod llround;
+// Simple arithmetic operations:
+pub mod dim;
+pub mod ma;                         // Needs tests
+// Introspection:
+pub mod logb;                       // Needs tests
+pub mod ilogb;                      // Needs tests
+// Other:
+pub mod min;
+pub mod max;
 
 // Common functionality.
 mod utils;
