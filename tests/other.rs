@@ -1,11 +1,11 @@
 extern crate math;
 
+use std::num::Float;
+use std::{f32, f64};
 use math::{fmaxf, fmax, fminf, fmin};
 
 #[test]
 fn max_f32() {
-    use std::num::Float;
-    use std::f32;
     assert_eq!(fmaxf(0.0, 0.0), 0.0);
     assert_eq!(fmaxf(10.0, 0.0), 10.0);
     assert_eq!(fmaxf(0.0, -10.0), 0.0);
@@ -16,8 +16,6 @@ fn max_f32() {
 
 #[test]
 fn max_f64() {
-    use std::num::Float;
-    use std::f64;
     assert_eq!(fmax(0.0, 0.0), 0.0);
     assert_eq!(fmax(10.0, 0.0), 10.0);
     assert_eq!(fmax(0.0, -10.0), 0.0);
@@ -28,8 +26,6 @@ fn max_f64() {
 
 #[test]
 fn min_f32() {
-    use std::num::Float;
-    use std::f32;
     assert_eq!(fminf(0.0, 0.0), 0.0);
     assert_eq!(fminf(-10.0, 0.0), -10.0);
     assert_eq!(fminf(0.0, -10.0), -10.0);
@@ -40,8 +36,6 @@ fn min_f32() {
 
 #[test]
 fn min_f64() {
-    use std::num::Float;
-    use std::f64;
     assert_eq!(fmin(0.0, 0.0), 0.0);
     assert_eq!(fmin(-10.0, 0.0), -10.0);
     assert_eq!(fmin(0.0, -10.0), -10.0);

@@ -63,8 +63,8 @@ mod llround;
 mod dim;
 mod ma;                         // Needs tests
 // Introspection:
-mod logb;                       // Needs tests
-mod ilogb;                      // Needs tests
+mod logb;
+mod ilogb;
 // Other:
 mod min;
 mod max;

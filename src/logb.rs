@@ -1,6 +1,6 @@
 use core::num::{Float, Int};
 
-use utils::{AsBits};
+use utils::{AsBits, Bits};
 use utils::{F32_SIGN_MASK, F64_SIGN_MASK};
 
 /// Get exponent of a 32-bit floating-point value.
@@ -14,10 +14,11 @@ pub extern fn logbf(i: f32) -> f32 {
         // Value is either ±∞ or NaN.
         return i + i;
     }
-    let mut exp = bits >> 23;
-    if exp == 0 {
+
+    let mut exp = bits.get_exponent();
+    if exp == -0x7F {
         // Denormal
-        exp -= (bits.leading_zeros() as u32) - 9;
+        exp -= (bits.leading_zeros() as i32) - 9;
     }
     return exp as f32;
 }
@@ -33,9 +34,10 @@ pub extern fn logb(i: f64) -> f64 {
         // Value is either ±∞ or NaN.
         return i + i;
     }
-    let mut exp = bits >> 52;
-    if exp == 0 {
-        exp -= (bits.leading_zeros() as u64) - 12;
+    let mut exp = bits.get_exponent();
+    if exp == -0x3FF {
+        // Denormal
+        exp -= (bits.leading_zeros() as i32) - 12;
     }
     return exp as f64;
 }

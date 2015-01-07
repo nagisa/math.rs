@@ -1,11 +1,11 @@
 extern crate math;
+use std::num::Float;
+use std::{f32, f64};
 
 use math::{fdimf, fdim};
 
 #[test]
 fn dim_f32() {
-    use std::num::Float;
-    use std::f32;
     assert_eq!(fdimf(10.0, 20.0), 0.0);
     assert_eq!(fdimf(20.0, -20.0), 40.0);
     assert!(fdimf(f32::NAN, 0.0).is_nan());
@@ -15,8 +15,6 @@ fn dim_f32() {
 
 #[test]
 fn dim_f64() {
-    use std::num::Float;
-    use std::f64;
     assert_eq!(fdim(10.0, 20.0), 0.0);
     assert_eq!(fdim(20.0, -20.0), 40.0);
     assert_eq!(fdim(1E100, -1E100), 2E100);

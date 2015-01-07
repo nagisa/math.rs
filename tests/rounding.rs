@@ -1,10 +1,11 @@
 extern crate math;
+use std::{f32, f64};
+use std::num::Float;
+
 use math::{roundf,round,ceilf,ceil,floorf,floor,truncf,trunc,lroundf,lround,llroundf,llround};
 
 #[test]
 fn round_f32() {
-    use std::f32;
-    use std::num::Float;
     assert_eq!(roundf(0.0), 0.0);
     assert_eq!(roundf(1.0), 1.0);
     assert_eq!(roundf(1.5), 2.0);
@@ -19,8 +20,6 @@ fn round_f32() {
 
 #[test]
 fn round_f64() {
-    use std::f64;
-    use std::num::Float;
     assert_eq!(round(0.0), 0.0);
     assert_eq!(round(1.0), 1.0);
     assert_eq!(round(1.5), 2.0);
@@ -35,8 +34,6 @@ fn round_f64() {
 
 #[test]
 fn ceil_f32() {
-    use std::f32;
-    use std::num::Float;
     assert_eq!(ceilf(0.0), 0.0);
     assert_eq!(ceilf(-0.0), 0.0);
     assert_eq!(ceilf(1.0), 1.0);
@@ -53,8 +50,6 @@ fn ceil_f32() {
 
 #[test]
 fn ceil_f64() {
-    use std::f64;
-    use std::num::Float;
     assert_eq!(ceil(0.0), 0.0);
     assert_eq!(ceil(-0.0), 0.0);
     assert_eq!(ceil(1.0), 1.0);
@@ -71,8 +66,6 @@ fn ceil_f64() {
 
 #[test]
 fn floor_f32() {
-    use std::f32;
-    use std::num::Float;
     assert_eq!(floorf(0.0), 0.0);
     assert_eq!(floorf(-0.0), 0.0);
     assert_eq!(floorf(1.0), 1.0);
@@ -89,8 +82,6 @@ fn floor_f32() {
 
 #[test]
 fn floor_f64() {
-    use std::f64;
-    use std::num::Float;
     assert_eq!(floor(0.0), 0.0);
     assert_eq!(floorf(-0.0), 0.0);
     assert_eq!(floor(1.0), 1.0);
@@ -107,8 +98,6 @@ fn floor_f64() {
 
 #[test]
 fn trunc_f32() {
-    use std::f32;
-    use std::num::Float;
     assert_eq!(truncf(1.1341241), 1.0);
     assert_eq!(truncf(0.01), 0.0);
     assert_eq!(truncf(-0.01), -0.0);
@@ -120,8 +109,6 @@ fn trunc_f32() {
 
 #[test]
 fn trunc_f64() {
-    use std::f64;
-    use std::num::Float;
     assert_eq!(trunc(1.1341241), 1.0);
     assert_eq!(trunc(0.01), 0.0);
     assert_eq!(trunc(-0.01), -0.0);
