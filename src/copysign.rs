@@ -1,9 +1,8 @@
-//! Operations on IEEE 754 floating-point number sign.
 use utils::{AsBits, Bits};
 use utils::{F32_SIGN_MASK, F64_SIGN_MASK};
 
 
-/// Return a value whose absolute value matches `l` and sign matches `r`
+/// Return a value whose absolute value matches `l` and sign matches `r`.
 #[no_mangle]
 pub extern fn copysignf(l : f32, r : f32) -> f32 {
     let (mut lbits, rbits) = (l.as_bits(), r.as_bits());
@@ -14,7 +13,7 @@ pub extern fn copysignf(l : f32, r : f32) -> f32 {
     lbits.from_bits()
 }
 
-/// Return a value whose absolute value matches `l` and sign matches `r`
+/// Return a value whose absolute value matches `l` and sign matches `r`.
 #[no_mangle]
 pub extern fn copysign(l : f64, r : f64) -> f64 {
     let (mut lbits, rbits) = (l.as_bits(), r.as_bits());

@@ -5,7 +5,7 @@ use libc::c_longlong;
 use utils::{AsBits, Bits};
 use utils::{F32_SIGN_MASK, F64_SIGN_MASK, F32_MANTISSA_MASK, F64_MANTISSA_MASK};
 
-/// Round the 32-bit floating-point number number away from zero.
+/// Round the 32-bit floating-point number away from zero.
 ///
 /// If the number is ∞, NaN or doesn’t fit into the result value, arbitrary value may be returned.
 #[no_mangle]
@@ -36,7 +36,7 @@ pub extern fn llroundf(i : f32) -> c_longlong {
     };
 }
 
-/// Round the 64-bit floating-point number number away from zero.
+/// Round the 64-bit floating-point number away from zero.
 ///
 /// If the number is ∞, NaN or doesn’t fit into the result value, arbitrary value may be returned.
 #[no_mangle]

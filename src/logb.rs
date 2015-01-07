@@ -3,7 +3,7 @@ use core::num::{Float, Int};
 use utils::{AsBits};
 use utils::{F32_SIGN_MASK, F64_SIGN_MASK};
 
-/// Get exponent of of a 32-bit floating-point value.
+/// Get exponent of a 32-bit floating-point value.
 #[no_mangle]
 pub extern fn logbf(i: f32) -> f32 {
     let mut bits = i.as_bits();
@@ -22,7 +22,7 @@ pub extern fn logbf(i: f32) -> f32 {
     return exp as f32;
 }
 
-/// Get exponent of of a 64-bit floating-point value.
+/// Get exponent of a 64-bit floating-point value.
 #[no_mangle]
 pub extern fn logb(i: f64) -> f64 {
     let mut bits = i.as_bits();

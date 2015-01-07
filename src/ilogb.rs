@@ -10,7 +10,7 @@ pub const FP_ILOGB0 : c_int = -0x8000_0000;
 /// Target and library dependent constant (i.e. might not be compatible with math.h).
 pub const FP_ILOGBNAN : c_int = 0x7FFF_FFFF;
 
-/// Get exponent of of a 32-bit floating-point value as an int.
+/// Get exponent of a 32-bit floating-point value as an int.
 #[no_mangle]
 pub extern fn ilogbf(i: f32) -> c_int {
     let mut bits = i.as_bits();
@@ -28,7 +28,7 @@ pub extern fn ilogbf(i: f32) -> c_int {
     FP_ILOGBNAN
 }
 
-/// Get exponent of of a 64-bit floating-point value.
+/// Get exponent of a 64-bit floating-point value as an int.
 #[no_mangle]
 pub extern fn ilogb(i: f64) -> c_int {
     let mut bits = i.as_bits();
