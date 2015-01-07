@@ -232,62 +232,122 @@ pub extern fn trunc(i : f64) -> f64 {
 }
 
 
-/// Round number away from zero.
-///
-/// If the number is ∞, NaN or doesn’t fit into the result value, None is returned.
-#[inline]
-fn lroundf_(i : f32) -> Option<c95::c_long> {
-    let mut bits : u32 = unsafe { transmute(i) };
-    let exp = (((bits as i32) >> 23) & 0xff) - 0x7f;
-    let sign : c95::c_long;
-    let result : c95::c_long;
 
-    // Calculate the sign
-    if bits & 0x8000_0000 != 0 {
-        sign = -1
-    } else {
-        sign = 1
-    }
-
-    // Calculate the result
-    bits = (bits & 0x007f_ffff) | 0x0080_0000;
-    if exp >= (8 * size_of::<c95::c_long>() - 1) as i32 {
-        // The number is too large for the output type
-        return None
-    } else if exp == -1 {
-        return Some(sign);
-    } else if exp < -1 {
-        return Some(0);
-    } else if exp < 23 {
-        bits += 0x0040_0000 >> (exp as uint);
-        result = (bits >> ((23 - exp) as uint)) as c95::c_long;
-    } else {
-        result = (bits << ((exp - 23) as uint)) as c95::c_long;
-    }
-    Some(sign * result)
-}
-
-#[no_mangle]
-pub extern fn lround(i : f64) -> c95::c_long {
-    0
-}
-
-/// Round number away from zero.
+/// Round the 32-bit floating-point number number away from zero.
 ///
 /// If the number is ∞, NaN or doesn’t fit into the result value, arbitrary value may be returned.
 #[no_mangle]
 pub extern fn lroundf(i : f32) -> c95::c_long {
-    lroundf_(i).unwrap_or(0)
+    let mut bits = i.as_bits();
+    let exp = bits.get_exponent();
+    // Minus one, because one bit has to be reserved for sign.
+    let target_size = 8 * size_of::<c95::c_long>() - 1;
+    let sign = if bits & F32_SIGN_MASK == 0 { 1 } else { -1 };
+
+    if exp < -1 {
+        return 0;
+    } else if exp == -1 {
+        return sign;
+    } else if exp >= (target_size as i32) {
+        // Result doesn’t fit. 0 is as arbitrary as any other value.
+        return 0;
+    } else if exp >= 23 {
+        bits &= F32_MANTISSA_MASK;
+        bits |= 0x0080_0000;
+        return sign * ((bits >> ((exp - 23) as uint)) as c95::c_long);
+    } else {
+        bits &= F32_MANTISSA_MASK;
+        bits |= 0x0080_0000;
+        bits += 0x0040_0000 >> (exp as uint);
+        return sign * ((bits >> ((23 - exp) as uint)) as c95::c_long);
+    };
 }
 
+/// Round the 64-bit floating-point number number away from zero.
+///
+/// If the number is ∞, NaN or doesn’t fit into the result value, arbitrary value may be returned.
 #[no_mangle]
-pub extern fn llround(i : f64) -> c99::c_longlong {
-    0
+pub extern fn lround(i : f64) -> c95::c_long {
+    // Same thing as lroundf with constants adapted.
+    let mut bits = i.as_bits();
+    let exp = bits.get_exponent();
+    let target_size = 8 * size_of::<c95::c_long>() - 1;
+    let sign = if bits & F64_SIGN_MASK == 0 { 1 } else { -1 };
+
+    if exp < -1 {
+        return 0;
+    } else if exp == -1 {
+        return sign;
+    } else if exp >= (target_size as i32) {
+        return 0;
+    } else if exp >= 52 {
+        bits &= F64_MANTISSA_MASK;
+        bits |= 0x0010_0000_0000_0000;
+        return sign * ((bits >> ((exp - 52) as uint)) as c95::c_long);
+    } else {
+        bits &= F64_MANTISSA_MASK;
+        bits |= 0x0010_0000_0000_0000;
+        bits += 0x0008_0000_0000_0000 >> (exp as uint);
+        return sign * ((bits >> ((52 - exp) as uint)) as c95::c_long);
+    }
 }
 
+/// Round the 32-bit floating-point number number away from zero.
+///
+/// If the number is ∞, NaN or doesn’t fit into the result value, arbitrary value may be returned.
 #[no_mangle]
 pub extern fn llroundf(i : f32) -> c99::c_longlong {
-    0
+    // Same thing as lroundf with different target_size.
+    let mut bits = i.as_bits();
+    let exp = bits.get_exponent();
+    // Minus one, because one bit has to be reserved for sign.
+    let target_size = 8 * size_of::<c99::c_longlong>() - 1;
+    let sign = if bits & F32_SIGN_MASK == 0 { 1 } else { -1 };
+
+    if exp < -1 {
+        return 0;
+    } else if exp == -1 {
+        return sign;
+    } else if exp >= (target_size as i32) {
+        // Result doesn’t fit. 0 is as arbitrary as any other value.
+        return 0;
+    } else if exp >= 23 {
+        bits &= F32_MANTISSA_MASK;
+        bits |= 0x0080_0000;
+        return sign * ((bits >> ((exp - 23) as uint)) as c95::c_long);
+    } else {
+        bits &= F32_MANTISSA_MASK;
+        bits |= 0x0080_0000;
+        bits += 0x0040_0000 >> (exp as uint);
+        return sign * ((bits >> ((23 - exp) as uint)) as c95::c_long);
+    };
 }
 
+/// Round the 64-bit floating-point number number away from zero.
+///
+/// If the number is ∞, NaN or doesn’t fit into the result value, arbitrary value may be returned.
+#[no_mangle]
+pub extern fn llround(i : f64) -> c99::c_longlong {
+    // Same thing as lround with different target_size.
+    let mut bits = i.as_bits();
+    let exp = bits.get_exponent();
+    let target_size = 8 * size_of::<c99::c_longlong>() - 1;
+    let sign = if bits & F64_SIGN_MASK == 0 { 1 } else { -1 };
 
+    if exp < -1 {
+        return 0;
+    } else if exp == -1 {
+        return sign;
+    } else if exp >= (target_size as i32) {
+        return 0;
+    } else if exp >= 52 {
+        bits &= F64_MANTISSA_MASK;
+        bits |= 0x0010_0000_0000_0000;
+        return sign * ((bits >> ((exp - 52) as uint)) as c95::c_long);
+    } else {
+        bits &= F64_MANTISSA_MASK;
+        bits |= 0x0010_0000_0000_0000;
+        bits += 0x0008_0000_0000_0000 >> (exp as uint);
+        return sign * ((bits >> ((52 - exp) as uint)) as c95::c_long);
+    }
+}

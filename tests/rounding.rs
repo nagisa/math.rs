@@ -1,5 +1,5 @@
 extern crate math;
-use math::{roundf,round,ceilf,ceil,floorf,floor,truncf,trunc};
+use math::{roundf,round,ceilf,ceil,floorf,floor,truncf,trunc,lroundf,lround,llroundf,llround};
 
 #[test]
 fn round_f32() {
@@ -132,17 +132,53 @@ fn trunc_f64() {
 }
 
 
-// #[test]
-// fn lround_f32() {
-//     use std::f32;
-//     use std::num::Float;
-//     assert_eq!(lroundf(0.0), 0);
-//     assert_eq!(lroundf(1.0), 1);
-//     assert_eq!(lroundf(1.6), 2);
-//     assert_eq!(lroundf(-1.5), -2);
-//     assert_eq!(lroundf(-1.4), -1);
-//     assert_eq!(lroundf(-0.01), 0);
-//     // Float can’t hold this value exactly, but it still fits into integer.
-//     // Allow to be off from expected result by at most 1
-//     assert!(lroundf(2147483647.0) - 2147483646 <= 2);
-// }
+#[test]
+fn lround_f32() {
+    assert_eq!(lroundf(0.0), 0);
+    assert_eq!(lroundf(1.0), 1);
+    assert_eq!(lroundf(1.6), 2);
+    assert_eq!(lroundf(-1.5), -2);
+    assert_eq!(lroundf(-1.4), -1);
+    assert_eq!(lroundf(-0.01), 0);
+    // f32 can’t hold this value exactly, but it still fits into 32-bit integer.
+    // Allow to be off from expected result by at most 1
+    assert!(lroundf(2147483647.0) - 2147483646 <= 2);
+}
+
+#[test]
+fn llround_f32() {
+    // Exactly the same thing as lround_f32…
+    assert_eq!(llroundf(0.0), 0);
+    assert_eq!(llroundf(1.0), 1);
+    assert_eq!(llroundf(1.6), 2);
+    assert_eq!(llroundf(-1.5), -2);
+    assert_eq!(llroundf(-1.4), -1);
+    assert_eq!(llroundf(-0.01), 0);
+    // f32 can’t hold this value exactly, but it still fits into integer.
+    // Allow to be off from expected result by at most 1
+    assert!(llroundf(2147483647.0) - 2147483646 <= 2);
+}
+
+#[test]
+fn lround_f64() {
+    assert_eq!(lround(0.0), 0);
+    assert_eq!(lround(1.0), 1);
+    assert_eq!(lround(1.6), 2);
+    assert_eq!(lround(-1.5), -2);
+    assert_eq!(lround(-1.4), -1);
+    assert_eq!(lround(-0.01), 0);
+    // f64, on the other hand, can hold the value exactly.
+    assert_eq!(lround(2147483647.0), 2147483647);
+}
+
+#[test]
+fn llround_f64() {
+    assert_eq!(llround(0.0), 0);
+    assert_eq!(llround(1.0), 1);
+    assert_eq!(llround(1.6), 2);
+    assert_eq!(llround(-1.5), -2);
+    assert_eq!(llround(-1.4), -1);
+    assert_eq!(llround(-0.01), 0);
+    // f64, on the other hand, can hold the value exactly.
+    assert_eq!(llround(2147483647.0), 2147483647);
+}
