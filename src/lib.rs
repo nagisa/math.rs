@@ -43,6 +43,9 @@ pub use ilogb::*;
 pub use min::*;
 pub use max::*;
 
+pub use nearbyint::*;
+pub use rint::*;
+
 // The modules are split and grouped by function class.
 //
 // Operations on signs:
@@ -64,6 +67,9 @@ pub mod ilogb;                      // Needs tests
 // Other:
 pub mod min;
 pub mod max;
+// Compatibility (possibly non-conforming):
+pub mod nearbyint;
+pub mod rint; // Also provides lrint and llrint
 
 // Common functionality.
 mod utils;
