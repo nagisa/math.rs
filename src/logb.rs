@@ -1,5 +1,4 @@
-use core::intrinsics::{ctlz32, ctlz64};
-use core::num::Float;
+use core::num::{Float, Int};
 
 use utils::{AsBits};
 use utils::{F32_SIGN_MASK, F64_SIGN_MASK};
@@ -18,9 +17,7 @@ pub extern fn logbf(i: f32) -> f32 {
     let mut exp = bits >> 23;
     if exp == 0 {
         // Denormal
-        unsafe {
-            exp -= ctlz32(bits) - 9;
-        }
+        exp -= (bits.leading_zeros() as u32) - 9;
     }
     return exp as f32;
 }
@@ -38,10 +35,7 @@ pub extern fn logb(i: f64) -> f64 {
     }
     let mut exp = bits >> 52;
     if exp == 0 {
-        // Denormal
-        unsafe {
-            exp -= ctlz64(bits) - 12;
-        }
+        exp -= (bits.leading_zeros() as u64) - 12;
     }
     return exp as f64;
 }

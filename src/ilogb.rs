@@ -1,4 +1,4 @@
-use core::intrinsics::{ctlz32, ctlz64};
+use core::num::Int;
 // TODO: remove this
 use libc::c_int;
 
@@ -20,9 +20,7 @@ pub extern fn ilogbf(i: f32) -> c_int {
     } else if bits < 0x0080_0000 {
         // Denormal
         let mut exp = bits >> 23;
-        unsafe {
-            exp -= ctlz32(bits) - 9;
-        }
+        exp -= (bits.leading_zeros() as u32) - 9;
         return exp as c_int;
     } else if bits < 0x7F80_0000 {
         return ((bits >> 23) as c_int) - 0x7F;
@@ -40,9 +38,7 @@ pub extern fn ilogb(i: f64) -> c_int {
     } else if bits < 0x0010_0000_0000_0000 {
         // Denormal
         let mut exp = bits >> 52;
-        unsafe {
-            exp -= ctlz64(bits) - 12;
-        }
+        exp -= (bits.leading_zeros() as u64) - 12;
         return exp as c_int;
     } else if bits < 0x7FF0_0000_0000_0000 {
         return ((bits >> 52) as c_int) - 0x3FF;
