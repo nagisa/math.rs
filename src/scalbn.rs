@@ -38,11 +38,11 @@ pub extern fn scalbnf(i: f32, x: c_int) -> f32 {
     exp += x;
     bits &= !F32_EXP_MASK;
     if exp > F32_DENORMAL_EXP {
-        bits |= (((exp + F32_MAX_EXP) as u32) << 23);
+        bits |= ((exp + F32_MAX_EXP) as u32) << 23;
         return bits.from_bits();
     } else {
         exp += 25; // Still denormal
-        bits |= (((exp + F32_MAX_EXP) as u32) << 23);
+        bits |= ((exp + F32_MAX_EXP) as u32) << 23;
         return bits.from_bits() * F32_TWOM25;
     }
 }
@@ -73,11 +73,11 @@ pub extern fn scalbn(i: f64, x: c_int) -> f64 {
     exp += x;
     bits &= !F64_EXP_MASK;
     if exp > F64_DENORMAL_EXP {
-        bits |= (((exp + F64_MAX_EXP) as u64) << 52);
+        bits |= ((exp + F64_MAX_EXP) as u64) << 52;
         return bits.from_bits();
     } else {
         exp += 54; // Still denormal
-        bits |= (((exp + F64_MAX_EXP) as u64) << 52);
+        bits |= ((exp + F64_MAX_EXP) as u64) << 52;
         return bits.from_bits() * F64_TWOM54;
     }
 }
