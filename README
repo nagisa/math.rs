@@ -53,8 +53,6 @@ float       log1pf(float);
 double      log2(double);
 float       log2f(float);
 float       logf(float);
-double      modf(double, double *);
-float       modff(float, float *);
 double      nextafter(double, double);
 float       nextafterf(float, float);
 double      pow(double, double);

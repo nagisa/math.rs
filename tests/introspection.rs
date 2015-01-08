@@ -4,6 +4,7 @@ use std::num::Float;
 use std::{f32, f64};
 use math::{logbf, logb, ilogbf, ilogb, FP_ILOGB0, FP_ILOGBNAN};
 use math::{scalbnf, scalbn};
+use math::{modff, modf};
 
 #[test]
 fn logb_f32() {
@@ -128,4 +129,32 @@ fn scalbn_f64() {
     assert_eq!(scalbn(f64::NEG_INFINITY, 100), f64::NEG_INFINITY);
     assert_eq!(scalbn(1.0, 1024), f64::INFINITY); // Out of range
     assert_eq!(scalbn(-1.0, 1024), f64::NEG_INFINITY); // Out of range
+}
+
+#[test]
+fn modf_f32() {
+    let mut o = 0.0f32;
+    assert!(modff(2.4, &mut o as *mut f32) - 0.4 < f32::EPSILON);
+    assert_eq!(o, 2.0);
+    // Special cases
+    assert!(modff(f32::NAN, &mut o as *mut f32).is_nan());
+    assert!(o.is_nan());
+    assert_eq!(modff(f32::INFINITY, &mut o as *mut f32), 0.0);
+    assert_eq!(o, f32::INFINITY);
+    assert_eq!(modff(f32::NEG_INFINITY, &mut o as *mut f32), 0.0);
+    assert_eq!(o, f32::NEG_INFINITY);
+}
+
+#[test]
+fn modf_f64() {
+    let mut o = 0.0f64;
+    assert!(modf(2.4, &mut o as *mut f64) - 0.4 < f64::EPSILON);
+    assert_eq!(o, 2.0);
+    // Special cases
+    assert!(modf(f64::NAN, &mut o as *mut f64).is_nan());
+    assert!(o.is_nan());
+    assert_eq!(modf(f64::INFINITY, &mut o as *mut f64), 0.0);
+    assert_eq!(o, f64::INFINITY);
+    assert_eq!(modf(f64::NEG_INFINITY, &mut o as *mut f64), -0.0);
+    assert_eq!(o, f64::NEG_INFINITY);
 }
