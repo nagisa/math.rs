@@ -46,6 +46,7 @@ pub use ilogb::*;
 pub use scalbn::*;
 pub use scalbln::*;
 pub use modf::*;
+pub use nextafter::*;
 
 pub use min::*;
 pub use max::*;
@@ -76,6 +77,7 @@ mod ilogb;
 mod scalbn;
 mod scalbln;
 mod modf;
+mod nextafter;
 // Other:
 mod min;
 mod max;

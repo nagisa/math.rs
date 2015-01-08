@@ -5,6 +5,7 @@ use std::{f32, f64};
 use math::{logbf, logb, ilogbf, ilogb, FP_ILOGB0, FP_ILOGBNAN};
 use math::{scalbnf, scalbn};
 use math::{modff, modf};
+use math::{nextafterf, nextafter};
 
 #[test]
 fn logb_f32() {
@@ -157,4 +158,32 @@ fn modf_f64() {
     assert_eq!(o, f64::INFINITY);
     assert_eq!(modf(f64::NEG_INFINITY, &mut o as *mut f64), -0.0);
     assert_eq!(o, f64::NEG_INFINITY);
+}
+
+#[test]
+fn nextafter_f32() {
+    assert_eq!(nextafterf(1.0, 10.0), 1.0000001);
+    assert_eq!(nextafterf(1.0, 0.0), 0.99999994);
+    assert_eq!(nextafterf(1.0, 1.0), 1.0);
+    // Subnormals
+    assert_eq!(nextafterf(1.4E-45, f32::NEG_INFINITY), 0.0);
+    assert_eq!(nextafterf(0.0, f32::INFINITY), 1.4E-45);
+    assert_eq!(nextafterf(0.0, f32::NEG_INFINITY), -1.4E-45);
+    // Special cases
+    assert!(nextafterf(f32::NAN, 0.0).is_nan());
+    assert!(nextafterf(0.0, f32::NAN).is_nan());
+}
+
+#[test]
+fn nextafter_f64() {
+    assert_eq!(nextafter(1.0, 10.0), 1.00000000000000022204460492503);
+    assert_eq!(nextafter(1.0, 0.0), 0.999999999999999888977697537484);
+    assert_eq!(nextafter(1.0, 1.0), 1.0);
+    // Subnormals
+    assert_eq!(nextafter(4.94065645841246544176568792868E-324, f64::NEG_INFINITY), 0.0);
+    assert_eq!(nextafter(0.0, f64::INFINITY), 4.94065645841246544176568792868E-324);
+    assert_eq!(nextafter(0.0, f64::NEG_INFINITY), -4.94065645841246544176568792868E-324);
+    // Special cases
+    assert!(nextafter(f64::NAN, 0.0).is_nan());
+    assert!(nextafter(0.0, f64::NAN).is_nan());
 }
