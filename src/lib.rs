@@ -39,15 +39,18 @@ pub use lround::*;
 pub use llround::*;
 pub use dim::*;
 pub use ma::*;
+
 pub use logb::*;
 pub use ilogb::*;
 pub use scalbn::*;
 pub use scalbln::*;
+
 pub use min::*;
 pub use max::*;
 
 pub use nearbyint::*;
 pub use rint::*;
+pub use ldexp::*;
 
 // The modules are split and grouped by function class.
 //
@@ -75,6 +78,7 @@ mod max;
 // Compatibility (possibly non-conforming):
 mod nearbyint;
 mod rint; // Also provides lrint and llrint
+mod ldexp;
 
 // Common functionality.
 mod utils;

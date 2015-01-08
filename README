@@ -43,8 +43,6 @@ float       hypotf(float, float);
 double      j0(double);
 double      j1(double);
 double      jn(int, double);
-double      ldexp(double, int);
-float       ldexpf(float, int);
 double      lgamma(double);
 float       lgammaf(float);
 double      log(double);
