@@ -41,6 +41,8 @@ pub use dim::*;
 pub use ma::*;
 pub use logb::*;
 pub use ilogb::*;
+pub use scalbn::*;
+pub use scalbln::*;
 pub use min::*;
 pub use max::*;
 
@@ -65,6 +67,8 @@ mod ma;                         // Needs tests
 // Introspection:
 mod logb;
 mod ilogb;
+mod scalbn;
+mod scalbln;
 // Other:
 mod min;
 mod max;

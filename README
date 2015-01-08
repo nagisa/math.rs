@@ -47,10 +47,6 @@ double      ldexp(double, int);
 float       ldexpf(float, int);
 double      lgamma(double);
 float       lgammaf(float);
-long long   llrint(double);
-long long   llrintf(float);
-long long   llround(double);
-long long   llroundf(float);
 double      log(double);
 double      log10(double);
 float       log10f(float);
@@ -59,14 +55,8 @@ float       log1pf(float);
 double      log2(double);
 float       log2f(float);
 float       logf(float);
-long        lrint(double);
-long        lrintf(float);
 double      modf(double, double *);
 float       modff(float, float *);
-double      nan(const char *);
-float       nanf(const char *);
-double      nearbyint(double);
-float       nearbyintf(float);
 double      nextafter(double, double);
 float       nextafterf(float, float);
 double      pow(double, double);
@@ -75,12 +65,8 @@ double      remainder(double, double);
 float       remainderf(float, float);
 double      remquo(double, double, int *);
 float       remquof(float, float, int *);
-double      rint(double);
-float       rintf(float);
 double      scalbln(double, long);
 float       scalblnf(float, long);
-double      scalbn(double, int);
-float       scalbnf(float, int);
 double      sin(double);
 float       sinf(float);
 double      sinh(double);
@@ -160,3 +146,10 @@ long        lroundl(long double);
 double      nexttoward(double, long double);
 float       nexttowardf(float, long double);
 int         ilogbl(long double);
+
+# UNDECIDED
+
+Generally useless and needs pretty hard dependency on libc.
+
+double      nan(const char *);
+float       nanf(const char *);

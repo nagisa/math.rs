@@ -10,7 +10,7 @@ pub trait Bits<Output> {
     /// Converts from `bits` representation back to float representation.
     fn from_bits(&self) -> Output;
     /// Extracts the exponent from `bits` representation.
-    fn get_exponent(&self) -> i32;
+    fn get_exponent(self) -> i32;
 }
 
 impl AsBits<u32> for f32 {
@@ -34,8 +34,8 @@ impl Bits<f32> for u32 {
     }
 
     #[inline(always)]
-    fn get_exponent(&self) -> i32 {
-        (((*self as i32) >> 23) & 0xff) - 0x7f
+    fn get_exponent(self) -> i32 {
+        ((((self as u32) & F32_EXP_MASK) >> 23) as i32) - F32_MAX_EXP
     }
 }
 
@@ -46,8 +46,8 @@ impl Bits<f64> for u64 {
     }
 
     #[inline(always)]
-    fn get_exponent(&self) -> i32 {
-        ((((*self as i64) >> 52) as i32) & 0x7ff) - 0x3ff
+    fn get_exponent(self) -> i32 {
+        ((((self as u64) & F64_EXP_MASK) >> 52) as i32) - F64_MAX_EXP
     }
 }
 
@@ -56,3 +56,15 @@ pub const F64_SIGN_MASK : u64 = 1 << 63;
 pub const F32_SIGN_MASK : u32 = 1 << 31;
 pub const F32_MANTISSA_MASK : u32 = 0x007F_FFFF;
 pub const F64_MANTISSA_MASK : u64 = 0x000F_FFFF_FFFF_FFFF;
+pub const F32_EXP_MASK : u32 = 0x7F80_0000;
+pub const F64_EXP_MASK : u64 = 0x7FF0_0000_0000_0000;
+
+pub const F32_MAX_EXP : i32 = 127;
+pub const F32_MIN_EXP : i32 = -149;
+pub const F32_DENORMAL_EXP : i32 = -127;
+pub const F32_NAN_EXP : i32 = 128;
+
+pub const F64_MAX_EXP : i32 = 1023;
+pub const F64_MIN_EXP : i32 = -1076;
+pub const F64_DENORMAL_EXP : i32 = -1023;
+pub const F64_NAN_EXP : i32 = 1024;
