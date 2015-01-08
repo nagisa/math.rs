@@ -37,6 +37,7 @@ pub use ceil::*;
 pub use trunc::*;
 pub use lround::*;
 pub use llround::*;
+
 pub use dim::*;
 pub use ma::*;
 
@@ -48,6 +49,7 @@ pub use modf::*;
 
 pub use min::*;
 pub use max::*;
+pub use hypot::*;
 
 pub use nearbyint::*;
 pub use rint::*;
@@ -77,6 +79,7 @@ mod modf;
 // Other:
 mod min;
 mod max;
+mod hypot;
 // Compatibility (possibly non-conforming):
 mod nearbyint;
 mod rint; // Also provides lrint and llrint

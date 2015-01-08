@@ -38,8 +38,6 @@ double      fmod(double, double);
 float       fmodf(float, float);
 double      frexp(double, int *);
 float       frexpf(float, int *);
-double      hypot(double, double);
-float       hypotf(float, float);
 double      j0(double);
 double      j1(double);
 double      jn(int, double);
