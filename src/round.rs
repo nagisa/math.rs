@@ -1,5 +1,6 @@
 use utils::{AsBits, Bits};
-use utils::{F32_SIGN_MASK, F64_SIGN_MASK, F32_MANTISSA_MASK, F64_MANTISSA_MASK};
+use utils::{F32_SIGN_MASK, F32_MANTISSA_MASK, F32_NAN_EXP};
+use utils::{F64_SIGN_MASK, F64_MANTISSA_MASK, F64_NAN_EXP};
 
 /// Round the 32-bit floating-point number away from zero.
 #[no_mangle]
@@ -16,7 +17,7 @@ pub extern fn roundf(i : f32) -> f32 {
             // Set its magnitude to 1
             bits |= 0x3F80_0000;
         }
-    } else if exp == 0x80 {
+    } else if exp == F32_NAN_EXP {
         // Value is either ±∞ or NaN.
         return i + i;
     } else if exp >= 23 {
@@ -50,7 +51,7 @@ pub extern fn round(i : f64) -> f64 {
         if exp == -1 {
             bits |= 0x3FF0_0000_0000_0000;
         }
-    } else if exp == 0x400 {
+    } else if exp == F64_NAN_EXP {
         return i + i;
     } else if exp >= 52 {
         return i;
