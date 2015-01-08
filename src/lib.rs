@@ -1,14 +1,26 @@
 //! Software implementations of operations on IEEE 754 floating point numbers in Rust.
 //!
-//! The implementations are not optimised to use any target-specific features yet. The code is
-//! supposed to be very well documented (unlike glibc’s libm) so one could learn from it.
+//! The implementations are not optimised to use any. The code is supposed to be very well
+//! documented (as if!) so one could learn from it.
 //!
-//! This is supposed to be linked into Rust binaries on systems where libm is not available or
-//! desirable.
+//! # Recommendations
 //!
-//! Note that this library does not provide some of more obscure functionality of libm such as
-//! global state (rounding direction, error reporting, etc). Functions that deviate from the libm
-//! are explicitly marked.
+//! This library is indended to be used with Rust programs on targets where libm is not available
+//! or linking to it is undesirable. It does not provide 1-to-1 feature parity with libm. Namely:
+//!
+//! * Any global state is not updated or used (this includes errors, rounding direction etc);
+//! * Several functions are omitted. Currently:
+//!   * nan, nanf – reliance on libc functions;
+//!   * Functions that take or return `long double` – `long double` is usually not a standard IEEE
+//!     754 type.
+//!
+//! # Usage
+//!
+//! In order to use this library nothing special needs to be done. Use regular functions from the
+//! `std` or `core` and simply link to this library. In case the target platform has no hardware
+//! support for some operation, software implementations provided by this library will be used
+//! automagically.
+// TODO: provide instructions to override default libm link and how to link to this library.
 
 #![crate_name="math"]
 #![crate_type="rlib"]
@@ -24,7 +36,7 @@ extern crate core;
 #[macro_use]
 extern crate std;
 
-// TODO: This dependency should not exist. We need to know types for c_long and c_longlong, though.
+// TODO: This dependency should not exist. We need to know types for c_{int,long,longlong} though.
 extern crate libc;
 
 
