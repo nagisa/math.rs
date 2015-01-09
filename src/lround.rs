@@ -26,12 +26,12 @@ pub extern fn lroundf(i : f32) -> c_long {
     } else if exp >= 23 {
         bits &= F32_MANTISSA_MASK;
         bits |= 0x0080_0000;
-        return sign * ((bits >> ((exp - 23) as uint)) as c_long);
+        return sign * ((bits >> (exp - 23)) as c_long);
     } else {
         bits &= F32_MANTISSA_MASK;
         bits |= 0x0080_0000;
-        bits += 0x0040_0000 >> (exp as uint);
-        return sign * ((bits >> ((23 - exp) as uint)) as c_long);
+        bits += 0x0040_0000 >> exp;
+        return sign * ((bits >> (23 - exp)) as c_long);
     };
 }
 
@@ -55,11 +55,11 @@ pub extern fn lround(i : f64) -> c_long {
     } else if exp >= 52 {
         bits &= F64_MANTISSA_MASK;
         bits |= 0x0010_0000_0000_0000;
-        return sign * ((bits >> ((exp - 52) as uint)) as c_long);
+        return sign * ((bits >> (exp - 52)) as c_long);
     } else {
         bits &= F64_MANTISSA_MASK;
         bits |= 0x0010_0000_0000_0000;
-        bits += 0x0008_0000_0000_0000 >> (exp as uint);
-        return sign * ((bits >> ((52 - exp) as uint)) as c_long);
+        bits += 0x0008_0000_0000_0000 >> exp;
+        return sign * ((bits >> (52 - exp)) as c_long);
     }
 }

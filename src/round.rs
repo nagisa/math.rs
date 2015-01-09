@@ -27,13 +27,13 @@ pub extern fn roundf(i : f32) -> f32 {
     } else {
         // The most complex case. First we check whether the number is already integral by checking
         // how much digits the mantissa holds.
-        let mask = F32_MANTISSA_MASK >> (exp as uint);
+        let mask = F32_MANTISSA_MASK >> exp;
         if bits & mask == 0 {
             return i;
         }
         // Otherwise armed with a smart selection of constants and operations we squeeze the
         // mantissa to represent the closest integral.
-        bits += 0x0040_0000 >> (exp as uint);
+        bits += 0x0040_0000 >> exp;
         bits &= !mask;
     }
     bits.from_bits()
@@ -56,11 +56,11 @@ pub extern fn round(i : f64) -> f64 {
     } else if exp >= 52 {
         return i;
     } else {
-        let mask = F64_MANTISSA_MASK >> (exp as uint);
+        let mask = F64_MANTISSA_MASK >> exp;
         if bits & mask == 0 {
             return i;
         }
-        bits += 0x0008_0000_0000_0000 >> (exp as uint);
+        bits += 0x0008_0000_0000_0000 >> exp;
         bits &= !mask;
     }
     bits.from_bits()

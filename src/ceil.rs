@@ -18,12 +18,12 @@ pub extern fn ceilf(i : f32) -> f32 {
     } else if exp >= 23 {
         return i;
     } else {
-        let mask = F32_MANTISSA_MASK >> (exp as uint);
+        let mask = F32_MANTISSA_MASK >> exp;
         if bits & mask == 0 {
             return i;
         }
         if bits < F32_SIGN_MASK {
-            bits += 0x0080_0000 >> (exp as uint);
+            bits += 0x0080_0000 >> exp;
         }
         bits &= !mask;
     }
@@ -47,12 +47,12 @@ pub extern fn ceil(i : f64) -> f64 {
     } else if exp >= 52 {
         return i;
     } else {
-        let mask = F64_MANTISSA_MASK >> (exp as uint);
+        let mask = F64_MANTISSA_MASK >> exp;
         if bits & mask == 0 {
             return i;
         }
         if bits < F64_SIGN_MASK {
-            bits += 0x0010_0000_0000_0000 >> (exp as uint);
+            bits += 0x0010_0000_0000_0000 >> exp;
         }
         bits &= !mask;
     }

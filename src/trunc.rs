@@ -16,7 +16,7 @@ pub extern fn truncf(i : f32) -> f32 {
         return i;
     } else {
         // Perserve the sign and simply truncate mantissa as necessary.
-        bits = (bits & F32_SIGN_MASK) | (bits & !(F32_MANTISSA_MASK >> (exp as uint)));
+        bits = (bits & F32_SIGN_MASK) | (bits & !(F32_MANTISSA_MASK >> exp));
     }
     bits.from_bits()
 }
@@ -36,7 +36,7 @@ pub extern fn trunc(i : f64) -> f64 {
         return i;
     } else {
         // Perserve the sign and simply truncate mantissa as necessary.
-        bits = (bits & F64_SIGN_MASK) | (bits & !(F64_MANTISSA_MASK >> (exp as uint)));
+        bits = (bits & F64_SIGN_MASK) | (bits & !(F64_MANTISSA_MASK >> exp));
     }
     bits.from_bits()
 }

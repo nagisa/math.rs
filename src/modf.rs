@@ -26,7 +26,7 @@ pub extern fn modff(i: f32, o: *mut f32) -> f32 {
         }
         bits &= F32_SIGN_MASK;
     } else {
-        let mask = F32_MANTISSA_MASK >> (exp as uint);
+        let mask = F32_MANTISSA_MASK >> exp;
         if bits & mask == 0 {
             // Input is integral
             unsafe { *o = i; }
@@ -62,7 +62,7 @@ pub extern fn modf(i: f64, o: *mut f64) -> f64 {
         }
         bits &= F64_SIGN_MASK;
     } else {
-        let mask = F64_MANTISSA_MASK >> (exp as uint);
+        let mask = F64_MANTISSA_MASK >> exp;
         if bits & mask == 0 {
             // Input is integral
             unsafe { *o = i; }

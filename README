@@ -119,8 +119,6 @@ long double remainderl(long double, long double);
 long double remquol(long double, long double, int *);
 long double rintl(long double);
 long double roundl(long double);
-long double scalblnl(long double, long);
-long double scalbnl(long double, int);
 long double sinhl(long double);
 long double sinl(long double);
 long double sqrtl(long double);

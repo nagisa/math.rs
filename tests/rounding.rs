@@ -1,3 +1,4 @@
+#![allow(unstable)]
 extern crate math;
 use std::{f32, f64};
 use std::num::Float;
