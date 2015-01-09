@@ -53,6 +53,8 @@ pub use llround::*;
 pub use dim::*;
 pub use ma::*;
 
+pub use sqrt::*;
+
 pub use logb::*;
 pub use ilogb::*;
 pub use scalbn::*;
@@ -83,6 +85,10 @@ mod llround;
 // Simple arithmetic operations:
 mod dim;
 mod ma;                         // Needs tests
+// The complex operations such as sqrt, log etc:
+mod sqrt;
+// Even more complex – trigonometric – operations:
+
 // Introspection:
 mod logb;
 mod ilogb;

@@ -63,8 +63,6 @@ double      sin(double);
 float       sinf(float);
 double      sinh(double);
 float       sinhf(float);
-double      sqrt(double);
-float       sqrtf(float);
 double      tan(double);
 float       tanf(float);
 double      tanh(double);
