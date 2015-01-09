@@ -55,6 +55,7 @@ pub use dim::*;
 pub use ma::*;
 
 pub use sqrt::*;
+pub use exp::*;
 
 pub use logb::*;
 pub use ilogb::*;
@@ -88,6 +89,7 @@ mod dim;
 mod ma;                         // Needs tests
 // The complex operations such as sqrt, log etc:
 mod sqrt;
+mod exp;
 // Even more complex – trigonometric – operations:
 
 // Introspection:

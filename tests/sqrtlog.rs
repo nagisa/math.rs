@@ -4,6 +4,7 @@ use std::num::Float;
 use std::{f32, f64};
 
 use math::{sqrtf, sqrt};
+use math::{expf, exp};
 
 #[test]
 fn sqrt_f32() {
@@ -35,4 +36,24 @@ fn sqrt_f64() {
     assert!(sqrt(-1.0).is_nan());
     assert!(sqrt(f64::NAN).is_nan());
     assert!(sqrt(f64::NEG_INFINITY).is_nan());
+}
+
+#[test]
+fn exp_f32() {
+    assert_eq!(expf(0.6931471806), 2.0);
+    assert_eq!(expf(f32::NEG_INFINITY), 0.0);
+    assert_eq!(expf(f32::INFINITY), f32::INFINITY);
+    assert_eq!(expf(89.0), f32::INFINITY);
+    assert_eq!(expf(-104.0), 0.0);
+    assert!(expf(f32::NAN).is_nan());
+}
+
+#[test]
+fn exp_f64() {
+    assert_eq!(exp(0.6931471805599452862), 2.0);
+    assert_eq!(exp(f64::NEG_INFINITY), 0.0);
+    assert_eq!(exp(f64::INFINITY), f64::INFINITY);
+    assert_eq!(exp(710.0), f64::INFINITY);
+    assert_eq!(exp(-756.0), 0.0);
+    assert!(exp(f64::NAN).is_nan());
 }
