@@ -21,7 +21,7 @@ const D9  : f64 =  2.755731922398589065255731922398E-6;
 const D11 : f64 = -2.505210838544171877505210838544E-8;
 const D13 : f64 =  1.605904383682161459939237717015E-10;
 
-fn _sin(i: f64) -> f64 {
+pub fn _sin(i: f64) -> f64 {
     // First of all, input size needs to be reduced to something more manageable. Remembering
     // sines have a period of 2π, reducing the input to [-π; π] comes to mind. However we will
     // abuse the fact that:

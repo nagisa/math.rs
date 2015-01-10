@@ -53,9 +53,11 @@ pub use llround::*;
 
 pub use dim::*;
 pub use ma::*;
-pub use fmod::*;
+// pub use fmod::*;
+//pub use remquo::*;
 
 pub use sin::{sin, sinf};
+pub use cos::{cos, cosf};
 
 pub use sqrt::*;
 pub use exp::*;
