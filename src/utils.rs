@@ -11,6 +11,8 @@ pub trait Bits<Output> {
     fn from_bits(&self) -> Output;
     /// Extracts the exponent from `bits` representation.
     fn get_exponent(self) -> i32;
+    /// Chekcs whether represents ±0 float
+    fn is_zero(self) -> bool;
 }
 
 impl AsBits<u32> for f32 {
@@ -37,6 +39,11 @@ impl Bits<f32> for u32 {
     fn get_exponent(self) -> i32 {
         ((((self as u32) & F32_EXP_MASK) >> 23) as i32) - F32_MAX_EXP
     }
+
+    #[inline(always)]
+    fn is_zero(self) -> bool {
+        self & !F32_SIGN_MASK == 0
+    }
 }
 
 impl Bits<f64> for u64 {
@@ -48,6 +55,11 @@ impl Bits<f64> for u64 {
     #[inline(always)]
     fn get_exponent(self) -> i32 {
         ((((self as u64) & F64_EXP_MASK) >> 52) as i32) - F64_MAX_EXP
+    }
+
+    #[inline(always)]
+    fn is_zero(self) -> bool {
+        self & !F64_SIGN_MASK == 0
     }
 }
 

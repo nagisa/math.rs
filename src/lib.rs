@@ -53,6 +53,7 @@ pub use llround::*;
 
 pub use dim::*;
 pub use ma::*;
+pub use fmod::*;
 
 pub use sqrt::*;
 pub use exp::*;
@@ -87,6 +88,7 @@ mod llround;
 // Simple arithmetic operations:
 mod dim;
 mod ma;                         // Needs tests
+mod fmod;
 // The complex operations such as sqrt, log etc:
 mod sqrt;
 mod exp;

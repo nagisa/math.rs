@@ -32,8 +32,6 @@ double      exp2(double);
 float       exp2f(float);
 double      expm1(double);
 float       expm1f(float);
-double      fmod(double, double);
-float       fmodf(float, float);
 double      frexp(double, int *);
 float       frexpf(float, int *);
 double      j0(double);
