@@ -4,7 +4,7 @@ use std::num::Float;
 use std::{f32, f64};
 
 use math::{fdimf, fdim};
-use math::{fmodf, fmod};
+// use math::{fmodf, fmod};
 
 #[test]
 fn dim_f32() {
@@ -27,38 +27,39 @@ fn dim_f64() {
     assert_eq!(fdim(f64::MAX_VALUE, f64::MIN_VALUE), f64::INFINITY);
 }
 
-#[test]
-fn fmod_f32() {
-    // Special cases
-    assert!(fmodf(f32::NAN, 1.0).is_nan());
-    assert!(fmodf(1.0, f32::NAN).is_nan());
-    assert!(fmodf(1.0, 0.0).is_nan());
-    assert!(fmodf(f32::INFINITY, 1.0).is_nan());
-    assert!(fmodf(0.0, 0.0).is_nan());
-    assert_eq!(fmodf(0.0, 1.0), 0.0);
-    // Results in 0
-    assert_eq!(fmodf(1.0, 1.0), 0.0);
-    assert_eq!(fmodf(5.0, 2.5), 0.0);
-    assert_eq!(fmodf(25.0, 5.0), 0.0);
 
-    assert_eq!(fmodf(5.5, 3.0), 2.5);
-    assert_eq!(fmodf(842.105, 632.105), 210.0);
-}
-
-#[test]
-fn fmod_f64() {
-    // Special cases
-    assert!(fmod(f64::NAN, 1.0).is_nan());
-    assert!(fmod(1.0, f64::NAN).is_nan());
-    assert!(fmod(1.0, 0.0).is_nan());
-    assert!(fmod(f64::INFINITY, 1.0).is_nan());
-    assert!(fmod(0.0, 0.0).is_nan());
-    assert_eq!(fmod(0.0, 1.0), 0.0);
-    // Results in 0
-    assert_eq!(fmod(1.0, 1.0), 0.0);
-    assert_eq!(fmod(5.0, 2.5), 0.0);
-    assert_eq!(fmod(25.0, 5.0), 0.0);
-
-    assert_eq!(fmod(5.5, 3.0), 2.5);
-    assert_eq!(fmod(842.105, 632.105), 210.0);
-}
+// #[test]
+// fn fmod_f32() {
+//     // Special cases
+//     assert!(fmodf(f32::NAN, 1.0).is_nan());
+//     assert!(fmodf(1.0, f32::NAN).is_nan());
+//     assert!(fmodf(1.0, 0.0).is_nan());
+//     assert!(fmodf(f32::INFINITY, 1.0).is_nan());
+//     assert!(fmodf(0.0, 0.0).is_nan());
+//     assert_eq!(fmodf(0.0, 1.0), 0.0);
+//     // Results in 0
+//     assert_eq!(fmodf(1.0, 1.0), 0.0);
+//     assert_eq!(fmodf(5.0, 2.5), 0.0);
+//     assert_eq!(fmodf(25.0, 5.0), 0.0);
+//
+//     assert_eq!(fmodf(5.5, 3.0), 2.5);
+//     assert_eq!(fmodf(842.105, 632.105), 210.0);
+// }
+//
+// #[test]
+// fn fmod_f64() {
+//     // Special cases
+//     assert!(fmod(f64::NAN, 1.0).is_nan());
+//     assert!(fmod(1.0, f64::NAN).is_nan());
+//     assert!(fmod(1.0, 0.0).is_nan());
+//     assert!(fmod(f64::INFINITY, 1.0).is_nan());
+//     assert!(fmod(0.0, 0.0).is_nan());
+//     assert_eq!(fmod(0.0, 1.0), 0.0);
+//     // Results in 0
+//     assert_eq!(fmod(1.0, 1.0), 0.0);
+//     assert_eq!(fmod(5.0, 2.5), 0.0);
+//     assert_eq!(fmod(25.0, 5.0), 0.0);
+//
+//     assert_eq!(fmod(5.5, 3.0), 2.5);
+//     assert_eq!(fmod(842.105, 632.105), 210.0);
+// }

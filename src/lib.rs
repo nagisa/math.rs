@@ -92,7 +92,7 @@ mod llround;
 // Simple arithmetic operations:
 mod dim;
 mod ma;                         // Needs tests
-mod fmod;
+// mod fmod;
 // The complex operations such as sqrt, log etc:
 mod sqrt;
 mod exp;
