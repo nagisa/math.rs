@@ -55,6 +55,8 @@ pub use dim::*;
 pub use ma::*;
 pub use fmod::*;
 
+pub use sin::{sin, sinf};
+
 pub use sqrt::*;
 pub use exp::*;
 
@@ -93,6 +95,8 @@ mod fmod;
 mod sqrt;
 mod exp;
 // Even more complex – trigonometric – operations:
+mod sin;
+mod cos;
 
 // Introspection:
 mod logb;
