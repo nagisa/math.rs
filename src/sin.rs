@@ -30,7 +30,7 @@ pub fn _sin(i: f64) -> f64 {
     // * ∀x ∈ [5π/4; 7π/4]: sin(x) = -cos(x - 3π/2)
     // * ∀x ∈ [7π/4; 2π]: sin(x) = sin(x - 2π)
     //
-    // This is necessary as Taylor series accuracy decreases quickly the farther away from
+    // This is necessary as Taylor series’ accuracy decreases quickly the farther away from
     // 0 the argument is and magnitude of numbers involved in series doesn’t quite allow us to do a
     // lot of iterations of the series.
     //
