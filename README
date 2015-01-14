@@ -53,8 +53,6 @@ double      remquo(double, double, int *);
 float       remquof(float, float, int *);
 double      sinh(double);
 float       sinhf(float);
-double      tan(double);
-float       tanf(float);
 double      tanh(double);
 float       tanhf(float);
 double      tgamma(double);

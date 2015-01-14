@@ -27,7 +27,6 @@
 // Since this is package provides very basic operations, our only dependencies will be Rust’s
 // libcore.
 #![no_std]
-#![unstable]
 #![allow(unstable)]
 
 #[macro_use]
@@ -58,6 +57,7 @@ pub use ma::*;
 
 pub use sin::{sin, sinf};
 pub use cos::{cos, cosf};
+pub use tan::{tan, tanf};
 
 pub use sqrt::*;
 pub use exp::*;
@@ -99,6 +99,7 @@ mod exp;
 // Even more complex – trigonometric – operations:
 mod sin;
 mod cos;
+mod tan;
 
 // Introspection:
 mod logb;

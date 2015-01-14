@@ -1,7 +1,7 @@
 #![allow(unstable)]
 extern crate math;
 
-use math::{sin, cos};
+use math::{sin, cos, tan};
 use std::num::Float;
 use std::f64;
 use std::f64::consts;
@@ -54,6 +54,24 @@ fn cos_f64(){
         assert!((cos(rad) - FRAC_1_SQRT2).abs() < EPSILON);
         let rad = (i as f64) * consts::PI_2 - 3.0 * consts::FRAC_PI_4;
         assert!((cos(rad) + FRAC_1_SQRT2).abs() < EPSILON);
+    }
+
+    // Special cases
+    assert!(cos(f64::NAN).is_nan());
+    assert!(cos(f64::INFINITY).is_nan());
+    assert!(cos(f64::NEG_INFINITY).is_nan());
+}
+
+#[test]
+fn tan_f64(){
+    const EPSILON: f64 = 1E-6;
+    const BIG: f64 = 1E12;
+
+    for i in ((-50)..50) {
+        let rad = (i as f64) * consts::PI;
+        assert!(tan(rad).abs() < EPSILON);
+        assert!(tan(rad + consts::FRAC_PI_4).abs() - 1.0 < EPSILON);
+        assert!(tan(rad + consts::FRAC_PI_2).abs() > BIG);
     }
 
     // Special cases
