@@ -8,8 +8,6 @@ double      acos(double);
 float       acosf(float);
 double      acosh(double);
 float       acoshf(float);
-double      asin(double);
-float       asinf(float);
 double      asinh(double);
 float       asinhf(float);
 double      atan(double);

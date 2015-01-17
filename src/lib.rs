@@ -58,6 +58,7 @@ pub use ma::*;
 pub use sin::{sin, sinf};
 pub use cos::{cos, cosf};
 pub use tan::{tan, tanf};
+pub use asin::{asin, asinf};
 
 pub use sqrt::*;
 pub use exp::*;
@@ -100,6 +101,7 @@ mod exp;
 mod sin;
 mod cos;
 mod tan;
+mod asin;
 
 // Introspection:
 mod logb;
