@@ -4,8 +4,6 @@ This is supposed to be linked into Rust binaries on systems where libm is not av
 
 # TODO:
 
-double      acos(double);
-float       acosf(float);
 double      acosh(double);
 float       acoshf(float);
 double      asinh(double);

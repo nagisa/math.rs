@@ -59,6 +59,7 @@ pub use sin::{sin, sinf};
 pub use cos::{cos, cosf};
 pub use tan::{tan, tanf};
 pub use asin::{asin, asinf};
+pub use acos::{acos, acosf};
 
 pub use sqrt::*;
 pub use exp::*;
@@ -102,6 +103,7 @@ mod sin;
 mod cos;
 mod tan;
 mod asin;
+mod acos;
 
 // Introspection:
 mod logb;
