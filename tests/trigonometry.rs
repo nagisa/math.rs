@@ -12,7 +12,7 @@ const FRAC_1_SQRT2 : f64 = 0.7071067811865475244008443;
 
 #[test]
 fn sin_f64(){
-    for i in (-50)..50 {
+    for i in (-50u16)..50 {
         let rad = (i as f64) * consts::PI;
         assert!(sin(rad).abs() < EPSILON);
         let rad = (i as f64) * consts::PI_2 + consts::FRAC_PI_2;
@@ -37,7 +37,7 @@ fn sin_f64(){
 
 #[test]
 fn cos_f64(){
-    for i in ((-50)..50) {
+    for i in ((-50u16)..50) {
         let rad = (i as f64) * consts::PI;
         if i % 2 == 0 {
             assert!((cos(rad) - 1.0).abs() < EPSILON)
@@ -67,7 +67,7 @@ fn tan_f64(){
     const EPSILON: f64 = 1E-6;
     const BIG: f64 = 1E12;
 
-    for i in ((-50)..50) {
+    for i in ((-50u16)..50) {
         let rad = (i as f64) * consts::PI;
         assert!(tan(rad).abs() < EPSILON);
         assert!(tan(rad + consts::FRAC_PI_4).abs() - 1.0 < EPSILON);
