@@ -33,10 +33,10 @@ pub fn _assert_feq<F: Float + SignBit + UpperExp>(i: F, o: F, maxdiff: F, flags:
             return Some(format!("assertion failed: {:E} ≠ {:E} (sign bits differ)", i, o));
         }
         if maxdiff == Float::zero() && i != o {
-            return Some(format!("assertion failed: {:E} ≠ {:E}", i, o));
+            return Some(format!("assertion failed: {:.30E} ≠ {:.30E}", i, o));
         } else {
             if (i - o).abs() > maxdiff {
-                return Some(format!("assertion failed: {:E} ≠ {:E} within certain treshold (difference: {:E})",
+                return Some(format!("assertion failed: {:.30E} ≠ {:.30E} within certain treshold (difference: {:.30E})",
                                     i, o, i - o));
             }
         }

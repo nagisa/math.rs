@@ -1,36 +1,88 @@
 #![allow(unstable)]
 extern crate math;
+
 use std::{f32, f64};
 use std::num::Float;
+use testutils::*;
+
+#[macro_use]
+mod testutils;
 
 use math::{roundf,round,ceilf,ceil,floorf,floor,truncf,trunc,lroundf,lround,llroundf,llround};
 
 #[test]
 fn round_f32() {
-    assert_eq!(roundf(0.0), 0.0);
-    assert_eq!(roundf(1.0), 1.0);
-    assert_eq!(roundf(1.5), 2.0);
-    assert_eq!(roundf(-1.5), -2.0);
-    assert_eq!(roundf(-1.4), -1.0);
-    assert_eq!(roundf(-0.01), 0.0);
-    assert_eq!(roundf(1.7654321E13), 1.7654321E13);
-    assert_eq!(roundf(123456789.500001), 123456790.0);
-    assert_eq!(roundf(f32::NEG_INFINITY), f32::NEG_INFINITY);
-    assert!(roundf(f32::NAN).is_nan());
+    assert_feq!(roundf( 0.0),  0.0, 0.0, TEST_ZERO_SIGN);
+    assert_feq!(roundf(-0.0), -0.0, 0.0, TEST_ZERO_SIGN);
+
+    assert_feq!(roundf( 0.2),  0.0, 0.0, TEST_ZERO_SIGN);
+    assert_feq!(roundf(-0.2), -0.0, 0.0, TEST_ZERO_SIGN);
+    assert_feq!(roundf( 0.5),  1.0, 0.0, 0);
+    assert_feq!(roundf(-0.5), -1.0, 0.0, 0);
+    assert_feq!(roundf( 0.8),  1.0, 0.0, 0);
+    assert_feq!(roundf(-0.8), -1.0, 0.0, 0);
+    assert_feq!(roundf( 1.5),  2.0, 0.0, 0);
+    assert_feq!(roundf(-1.5), -2.0, 0.0, 0);
+
+    assert_feq!(roundf( 0.1),    0.0, 0.0, TEST_ZERO_SIGN);
+    assert_feq!(roundf( 0.25),   0.0, 0.0, TEST_ZERO_SIGN);
+    assert_feq!(roundf( 0.625),  1.0, 0.0, 0);
+    assert_feq!(roundf(-0.1),   -0.0, 0.0, TEST_ZERO_SIGN);
+    assert_feq!(roundf(-0.25),  -0.0, 0.0, TEST_ZERO_SIGN);
+    assert_feq!(roundf(-0.625), -1.0, 0.0, 0);
+
+    assert_feq!(roundf( 2097152.5),  2097153.0, 0.0, 0);
+    assert_feq!(roundf(-2097152.5), -2097153.0, 0.0, 0);
+
+    assert_feq!(roundf(f32::NEG_INFINITY), f32::NEG_INFINITY, 0.0, 0);
+    assert_feq!(roundf(f32::INFINITY),     f32::INFINITY,     0.0, 0);
+
+    assert_feq!(roundf( f32::NAN),  f32::NAN, 0.0, TEST_NAN_SIGN);
+    assert_feq!(roundf(-f32::NAN), -f32::NAN, 0.0, TEST_NAN_SIGN);
 }
 
 #[test]
 fn round_f64() {
-    assert_eq!(round(0.0), 0.0);
-    assert_eq!(round(1.0), 1.0);
-    assert_eq!(round(1.5), 2.0);
-    assert_eq!(round(-1.5), -2.0);
-    assert_eq!(round(-1.4), -1.0);
-    assert_eq!(round(-0.01), 0.0);
-    assert_eq!(round(1.7654321E13), 1.7654321E13);
-    assert_eq!(round(123456789.500001), 123456790.0);
-    assert_eq!(round(f64::NEG_INFINITY), f64::NEG_INFINITY);
-    assert!(round(f64::NAN).is_nan());
+    assert_feq!(round( 0.0),  0.0, 0.0, TEST_ZERO_SIGN);
+    assert_feq!(round(-0.0), -0.0, 0.0, TEST_ZERO_SIGN);
+
+    assert_feq!(round( 0.2),  0.0, 0.0, TEST_ZERO_SIGN);
+    assert_feq!(round(-0.2), -0.0, 0.0, TEST_ZERO_SIGN);
+    assert_feq!(round( 0.5),  1.0, 0.0, 0);
+    assert_feq!(round(-0.5), -1.0, 0.0, 0);
+    assert_feq!(round( 0.8),  1.0, 0.0, 0);
+    assert_feq!(round(-0.8), -1.0, 0.0, 0);
+    assert_feq!(round( 1.5),  2.0, 0.0, 0);
+    assert_feq!(round(-1.5), -2.0, 0.0, 0);
+
+    assert_feq!(round( 0.1),    0.0, 0.0, TEST_ZERO_SIGN);
+    assert_feq!(round( 0.25),   0.0, 0.0, TEST_ZERO_SIGN);
+    assert_feq!(round( 0.625),  1.0, 0.0, 0);
+    assert_feq!(round(-0.1),   -0.0, 0.0, TEST_ZERO_SIGN);
+    assert_feq!(round(-0.25),  -0.0, 0.0, TEST_ZERO_SIGN);
+    assert_feq!(round(-0.625), -1.0, 0.0, 0);
+
+    assert_feq!(round( 2097152.5),  2097153.0, 0.0, 0);
+    assert_feq!(round(-2097152.5), -2097153.0, 0.0, 0);
+
+    assert_feq!(round( 4503599627370495.5),   4503599627370496.0, 0.0, 0);
+    assert_feq!(round( 4503599627370496.25),  4503599627370496.0, 0.0, 0);
+    // TODO: Issues with representability? (3rd column should be 0.0)
+    assert_feq!(round( 4503599627370496.5),   4503599627370497.0, 1.0, 0);
+    assert_feq!(round( 4503599627370496.75),  4503599627370497.0, 0.0, 0);
+    assert_feq!(round( 4503599627370497.5),   4503599627370498.0, 0.0, 0);
+    assert_feq!(round(-4503599627370495.5),  -4503599627370496.0, 0.0, 0);
+    assert_feq!(round(-4503599627370496.25), -4503599627370496.0, 0.0, 0);
+    // TODO: Issues with representability? (3rd column should be 0.0)
+    assert_feq!(round(-4503599627370496.5),  -4503599627370497.0, 1.0, 0);
+    assert_feq!(round(-4503599627370496.75), -4503599627370497.0, 0.0, 0);
+    assert_feq!(round(-4503599627370497.5),  -4503599627370498.0, 0.0, 0);
+
+    assert_feq!(round(f64::NEG_INFINITY), f64::NEG_INFINITY, 0.0, 0);
+    assert_feq!(round(f64::INFINITY),     f64::INFINITY,     0.0, 0);
+
+    assert_feq!(round( f64::NAN),  f64::NAN, 0.0, TEST_NAN_SIGN);
+    assert_feq!(round(-f64::NAN), -f64::NAN, 0.0, TEST_NAN_SIGN);
 }
 
 #[test]
