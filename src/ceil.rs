@@ -9,7 +9,7 @@ pub extern fn ceilf(i : f32) -> f32 {
 
     if exp < 0 {
         if bits >= F32_SIGN_MASK || bits == 0 {
-            return 0.0;
+            return (bits & F32_SIGN_MASK).from_bits();
         } else {
             return 1.0;
         }
@@ -38,7 +38,7 @@ pub extern fn ceil(i : f64) -> f64 {
 
     if exp < 0 {
         if bits >= F64_SIGN_MASK || bits == 0 {
-            return 0.0;
+            return (bits & F64_SIGN_MASK).from_bits();
         } else {
             return 1.0;
         }

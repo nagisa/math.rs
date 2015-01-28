@@ -67,16 +67,15 @@ fn round_f64() {
 
     assert_feq!(round( 4503599627370495.5),   4503599627370496.0, 0.0, 0);
     assert_feq!(round( 4503599627370496.25),  4503599627370496.0, 0.0, 0);
-    // TODO: Issues with representability? (3rd column should be 0.0)
-    assert_feq!(round( 4503599627370496.5),   4503599627370497.0, 1.0, 0);
     assert_feq!(round( 4503599627370496.75),  4503599627370497.0, 0.0, 0);
     assert_feq!(round( 4503599627370497.5),   4503599627370498.0, 0.0, 0);
     assert_feq!(round(-4503599627370495.5),  -4503599627370496.0, 0.0, 0);
     assert_feq!(round(-4503599627370496.25), -4503599627370496.0, 0.0, 0);
-    // TODO: Issues with representability? (3rd column should be 0.0)
-    assert_feq!(round(-4503599627370496.5),  -4503599627370497.0, 1.0, 0);
     assert_feq!(round(-4503599627370496.75), -4503599627370497.0, 0.0, 0);
     assert_feq!(round(-4503599627370497.5),  -4503599627370498.0, 0.0, 0);
+    // TODO: Issues with representability? (3rd column should be 0.0)
+    assert_feq!(round( 4503599627370496.5),   4503599627370497.0, 1.0, 0);
+    assert_feq!(round(-4503599627370496.5),  -4503599627370497.0, 1.0, 0);
 
     assert_feq!(round(f64::NEG_INFINITY), f64::NEG_INFINITY, 0.0, 0);
     assert_feq!(round(f64::INFINITY),     f64::INFINITY,     0.0, 0);
@@ -87,34 +86,60 @@ fn round_f64() {
 
 #[test]
 fn ceil_f32() {
-    assert_eq!(ceilf(0.0), 0.0);
-    assert_eq!(ceilf(-0.0), 0.0);
-    assert_eq!(ceilf(1.0), 1.0);
-    assert_eq!(ceilf(1.5), 2.0);
-    assert_eq!(ceilf(-1.5), -1.0);
-    assert_eq!(ceilf(-1.4), -1.0);
-    assert_eq!(ceilf(-0.01), -0.0);
-    assert_eq!(ceilf(0.999), 1.0);
-    assert_eq!(ceilf(1.7654321E13), 1.7654321E13);
-    assert_eq!(ceilf(123456789.500001), 123456790.0);
-    assert_eq!(ceilf(f32::NEG_INFINITY), f32::NEG_INFINITY);
-    assert!(ceilf(f32::NAN).is_nan());
+    assert_feq!(ceilf( 0.0),  0.0, 0.0, TEST_ZERO_SIGN);
+    assert_feq!(ceilf(-0.0), -0.0, 0.0, TEST_ZERO_SIGN);
+
+    assert_feq!(ceilf( f32::consts::PI),  4.0, 0.0, 0);
+    assert_feq!(ceilf(-f32::consts::PI), -3.0, 0.0, 0);
+
+    assert_feq!(ceilf( F32_MIN_SUBNORM),     1.0, 0.0, 0);
+    assert_feq!(ceilf(-F32_MIN_SUBNORM),    -0.0, 0.0, TEST_ZERO_SIGN);
+    assert_feq!(ceilf( f32::MIN_POS_VALUE),  1.0, 0.0, 0);
+    assert_feq!(ceilf(-f32::MIN_POS_VALUE), -0.0, 0.0, TEST_ZERO_SIGN);
+    assert_feq!(ceilf(f32::MAX_VALUE),       f32::MAX_VALUE, 0.0, 0);
+    assert_feq!(ceilf(f32::MIN_VALUE),       f32::MIN_VALUE, 0.0, 0);
+
+    assert_feq!(ceilf( 0.1),                 1.0, 0.0, 0);
+    assert_feq!(ceilf( 0.25),                1.0, 0.0, 0);
+    assert_feq!(ceilf( 0.625),               1.0, 0.0, 0);
+    assert_feq!(ceilf(-0.1),                -0.0, 0.0, TEST_ZERO_SIGN);
+    assert_feq!(ceilf(-0.25),               -0.0, 0.0, TEST_ZERO_SIGN);
+    assert_feq!(ceilf(-0.625),              -0.0, 0.0, TEST_ZERO_SIGN);
+
+    assert_feq!(ceilf(f32::NEG_INFINITY), f32::NEG_INFINITY, 0.0, 0);
+    assert_feq!(ceilf(f32::INFINITY),     f32::INFINITY,     0.0, 0);
+
+    assert_feq!(ceilf( f32::NAN),  f32::NAN, 0.0, TEST_NAN_SIGN);
+    assert_feq!(ceilf(-f32::NAN), -f32::NAN, 0.0, TEST_NAN_SIGN);
 }
 
 #[test]
 fn ceil_f64() {
-    assert_eq!(ceil(0.0), 0.0);
-    assert_eq!(ceil(-0.0), 0.0);
-    assert_eq!(ceil(1.0), 1.0);
-    assert_eq!(ceil(1.5), 2.0);
-    assert_eq!(ceil(-1.5), -1.0);
-    assert_eq!(ceil(-1.4), -1.0);
-    assert_eq!(ceil(-0.01), -0.0);
-    assert_eq!(ceil(0.999), 1.0);
-    assert_eq!(ceil(1.7654321E13), 1.7654321E13);
-    assert_eq!(ceil(123456789.500001), 123456790.0);
-    assert_eq!(ceil(f64::NEG_INFINITY), f64::NEG_INFINITY);
-    assert!(ceil(f64::NAN).is_nan());
+    assert_feq!(ceil( 0.0),  0.0, 0.0, TEST_ZERO_SIGN);
+    assert_feq!(ceil(-0.0), -0.0, 0.0, TEST_ZERO_SIGN);
+
+    assert_feq!(ceil( f64::consts::PI),  4.0, 0.0, 0);
+    assert_feq!(ceil(-f64::consts::PI), -3.0, 0.0, 0);
+
+    assert_feq!(ceil( F64_MIN_SUBNORM),     1.0, 0.0, 0);
+    assert_feq!(ceil(-F64_MIN_SUBNORM),    -0.0, 0.0, TEST_ZERO_SIGN);
+    assert_feq!(ceil( f64::MIN_POS_VALUE),  1.0, 0.0, 0);
+    assert_feq!(ceil(-f64::MIN_POS_VALUE), -0.0, 0.0, TEST_ZERO_SIGN);
+    assert_feq!(ceil(f64::MAX_VALUE),       f64::MAX_VALUE, 0.0, 0);
+    assert_feq!(ceil(f64::MIN_VALUE),       f64::MIN_VALUE, 0.0, 0);
+
+    assert_feq!(ceil( 0.1),                 1.0, 0.0, 0);
+    assert_feq!(ceil( 0.25),                1.0, 0.0, 0);
+    assert_feq!(ceil( 0.625),               1.0, 0.0, 0);
+    assert_feq!(ceil(-0.1),                -0.0, 0.0, TEST_ZERO_SIGN);
+    assert_feq!(ceil(-0.25),               -0.0, 0.0, TEST_ZERO_SIGN);
+    assert_feq!(ceil(-0.625),              -0.0, 0.0, TEST_ZERO_SIGN);
+
+    assert_feq!(ceil(f64::NEG_INFINITY), f64::NEG_INFINITY, 0.0, 0);
+    assert_feq!(ceil(f64::INFINITY),     f64::INFINITY,     0.0, 0);
+
+    assert_feq!(ceil( f64::NAN),  f64::NAN, 0.0, TEST_NAN_SIGN);
+    assert_feq!(ceil(-f64::NAN), -f64::NAN, 0.0, TEST_NAN_SIGN);
 }
 
 #[test]
