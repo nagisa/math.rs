@@ -1,4 +1,3 @@
-#![allow(unstable)]
 use std::mem::transmute;
 use std::num::Float;
 use std::fmt::UpperExp;
@@ -6,8 +5,8 @@ use std::fmt::UpperExp;
 pub const TEST_NAN_SIGN: u32 = 1 << 0;
 pub const TEST_ZERO_SIGN: u32 = 1 << 1;
 
-// pub const F32_MIN_SUBNORM: f32 = 1.4E-45;
-// pub const F64_MIN_SUBNORM: f32 = 4.94065645841246544176568792868E-324;
+pub const F32_MIN_SUBNORM: f32 = 1.4E-45;
+pub const F64_MIN_SUBNORM: f64 = 4.94065645841246544176568792868E-324;
 
 pub trait SignBit {
     fn signbit(self) -> bool;

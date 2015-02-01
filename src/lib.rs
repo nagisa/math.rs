@@ -27,7 +27,7 @@
 // Since this is package provides very basic operations, our only dependencies will be Rust’s
 // libcore.
 #![no_std]
-#![allow(unstable)]
+#![feature(core,libc)]
 
 #[macro_use]
 extern crate core;

@@ -1,3 +1,4 @@
+#![feature(std_misc)]
 extern crate math;
 
 use std::{f64, f32};

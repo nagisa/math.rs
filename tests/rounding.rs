@@ -1,4 +1,4 @@
-#![allow(unstable)]
+#![feature(std_misc, core)]
 extern crate math;
 
 use std::{f32, f64};
