@@ -190,24 +190,80 @@ fn floor_f64() {
 
 #[test]
 fn trunc_f32() {
-    assert_eq!(truncf(1.1341241), 1.0);
-    assert_eq!(truncf(0.01), 0.0);
-    assert_eq!(truncf(-0.01), -0.0);
-    assert_eq!(truncf(100.230), 100.0);
-    assert_eq!(truncf(123456789.123456789), 123456789.0);
-    assert_eq!(truncf(f32::NEG_INFINITY), f32::NEG_INFINITY);
-    assert!(truncf(f32::NAN).is_nan());
+    assert_feq!(truncf( 0.0),  0.0, 0.0, TEST_ZERO_SIGN);
+    assert_feq!(truncf(-0.0), -0.0, 0.0, TEST_ZERO_SIGN);
+
+    assert_feq!(truncf( f32::consts::PI),  3.0, 0.0, 0);
+    assert_feq!(truncf(-f32::consts::PI), -3.0, 0.0, 0);
+
+    assert_feq!(truncf( F32_MIN_SUBNORM),     0.0, 0.0, TEST_ZERO_SIGN);
+    assert_feq!(truncf(-F32_MIN_SUBNORM),    -0.0, 0.0, TEST_ZERO_SIGN);
+    assert_feq!(truncf( f32::MIN_POS_VALUE),  0.0, 0.0, TEST_ZERO_SIGN);
+    assert_feq!(truncf(-f32::MIN_POS_VALUE), -0.0, 0.0, TEST_ZERO_SIGN);
+    assert_feq!(truncf(f32::MAX_VALUE),       f32::MAX_VALUE, 0.0, 0);
+    assert_feq!(truncf(f32::MIN_VALUE),       f32::MIN_VALUE, 0.0, 0);
+
+    assert_feq!(truncf( 0.1),                 0.0,          0.0, TEST_ZERO_SIGN);
+    assert_feq!(truncf( 0.25),                0.0,          0.0, TEST_ZERO_SIGN);
+    assert_feq!(truncf( 0.625),               0.0,          0.0, TEST_ZERO_SIGN);
+    assert_feq!(truncf( 1.0),                 1.0,          0.0, 0);
+    assert_feq!(truncf( 1.625),               1.0,          0.0, 0);
+    assert_feq!(truncf( 1048580.625),         1048580.0,    0.0, 0);
+    assert_feq!(truncf( 8388610.125),         8388610.0,    0.0, 0);
+    assert_feq!(truncf( 4294967296.625),      4294967296.0, 0.0, 0);
+    assert_feq!(truncf(-0.1),                -0.0,          0.0, TEST_ZERO_SIGN);
+    assert_feq!(truncf(-0.25),               -0.0,          0.0, TEST_ZERO_SIGN);
+    assert_feq!(truncf(-0.625),              -0.0,          0.0, TEST_ZERO_SIGN);
+    assert_feq!(truncf(-1.0),                -1.0,          0.0, 0);
+    assert_feq!(truncf(-1.625),              -1.0,          0.0, 0);
+    assert_feq!(truncf(-1048580.625),        -1048580.0,    0.0, 0);
+    assert_feq!(truncf(-8388610.125),        -8388610.0,    0.0, 0);
+    assert_feq!(truncf(-4294967296.625),     -4294967296.0, 0.0, 0);
+
+    assert_feq!(truncf(f32::NEG_INFINITY), f32::NEG_INFINITY, 0.0, 0);
+    assert_feq!(truncf(f32::INFINITY),     f32::INFINITY,     0.0, 0);
+
+    assert_feq!(truncf( f32::NAN),  f32::NAN, 0.0, TEST_NAN_SIGN);
+    assert_feq!(truncf(-f32::NAN), -f32::NAN, 0.0, TEST_NAN_SIGN);
 }
 
 #[test]
 fn trunc_f64() {
-    assert_eq!(trunc(1.1341241), 1.0);
-    assert_eq!(trunc(0.01), 0.0);
-    assert_eq!(trunc(-0.01), -0.0);
-    assert_eq!(trunc(100.230), 100.0);
-    assert_eq!(trunc(123456789.123456789), 123456789.0);
-    assert_eq!(trunc(f64::NEG_INFINITY), f64::NEG_INFINITY);
-    assert!(trunc(f64::NAN).is_nan());
+    assert_feq!(trunc( 0.0),  0.0, 0.0, TEST_ZERO_SIGN);
+    assert_feq!(trunc(-0.0), -0.0, 0.0, TEST_ZERO_SIGN);
+
+    assert_feq!(trunc( f64::consts::PI),  3.0, 0.0, 0);
+    assert_feq!(trunc(-f64::consts::PI), -3.0, 0.0, 0);
+
+    assert_feq!(trunc( F64_MIN_SUBNORM),     0.0, 0.0, TEST_ZERO_SIGN);
+    assert_feq!(trunc(-F64_MIN_SUBNORM),    -0.0, 0.0, TEST_ZERO_SIGN);
+    assert_feq!(trunc( f64::MIN_POS_VALUE),  0.0, 0.0, TEST_ZERO_SIGN);
+    assert_feq!(trunc(-f64::MIN_POS_VALUE), -0.0, 0.0, TEST_ZERO_SIGN);
+    assert_feq!(trunc(f64::MAX_VALUE),       f64::MAX_VALUE, 0.0, 0);
+    assert_feq!(trunc(f64::MIN_VALUE),       f64::MIN_VALUE, 0.0, 0);
+
+    assert_feq!(trunc( 0.1),                 0.0,          0.0, TEST_ZERO_SIGN);
+    assert_feq!(trunc( 0.25),                0.0,          0.0, TEST_ZERO_SIGN);
+    assert_feq!(trunc( 0.625),               0.0,          0.0, TEST_ZERO_SIGN);
+    assert_feq!(trunc( 1.0),                 1.0,          0.0, 0);
+    assert_feq!(trunc( 1.625),               1.0,          0.0, 0);
+    assert_feq!(trunc( 1048580.625),         1048580.0,    0.0, 0);
+    assert_feq!(trunc( 8388610.125),         8388610.0,    0.0, 0);
+    assert_feq!(trunc( 4294967296.625),      4294967296.0, 0.0, 0);
+    assert_feq!(trunc(-0.1),                -0.0,          0.0, TEST_ZERO_SIGN);
+    assert_feq!(trunc(-0.25),               -0.0,          0.0, TEST_ZERO_SIGN);
+    assert_feq!(trunc(-0.625),              -0.0,          0.0, TEST_ZERO_SIGN);
+    assert_feq!(trunc(-1.0),                -1.0,          0.0, 0);
+    assert_feq!(trunc(-1.625),              -1.0,          0.0, 0);
+    assert_feq!(trunc(-1048580.625),        -1048580.0,    0.0, 0);
+    assert_feq!(trunc(-8388610.125),        -8388610.0,    0.0, 0);
+    assert_feq!(trunc(-4294967296.625),     -4294967296.0, 0.0, 0);
+
+    assert_feq!(trunc(f64::NEG_INFINITY), f64::NEG_INFINITY, 0.0, 0);
+    assert_feq!(trunc(f64::INFINITY),     f64::INFINITY,     0.0, 0);
+
+    assert_feq!(trunc( f64::NAN),  f64::NAN, 0.0, TEST_NAN_SIGN);
+    assert_feq!(trunc(-f64::NAN), -f64::NAN, 0.0, TEST_NAN_SIGN);
 }
 
 
