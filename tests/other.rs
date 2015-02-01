@@ -69,22 +69,60 @@ fn max_f64() {
 
 #[test]
 fn min_f32() {
-    assert_eq!(fminf(0.0, 0.0), 0.0);
-    assert_eq!(fminf(-10.0, 0.0), -10.0);
-    assert_eq!(fminf(0.0, -10.0), -10.0);
-    assert_eq!(fminf(f32::NAN, 0.0), 0.0);
-    assert_eq!(fminf(0.0, f32::NAN), 0.0);
-    assert!(fminf(f32::NAN, f32::NAN).is_nan());
+    assert_feq!(fminf( 0.0,  0.0),  0.0, 0.0, TEST_ZERO_SIGN);
+    assert_feq!(fminf(-0.0, -0.0), -0.0, 0.0, TEST_ZERO_SIGN);
+    assert_feq!(fminf( 9.0,  0.0),  0.0, 0.0, 0);
+    assert_feq!(fminf(-9.0, -0.0), -9.0, 0.0, TEST_ZERO_SIGN);
+    assert_feq!(fminf( 0.0,  9.0),  0.0, 0.0, 0);
+    assert_feq!(fminf(-0.0, -9.0), -9.0, 0.0, TEST_ZERO_SIGN);
+    assert_feq!(fminf( 0.0,  9.0),  0.0, 0.0, 0);
+    assert_feq!(fminf(-0.0, -9.0), -9.0, 0.0, TEST_ZERO_SIGN);
+
+
+    assert_feq!(fminf( f32::INFINITY,  9.0),             9.0, 0.0, 0);
+    assert_feq!(fminf( 9.0,            f32::INFINITY),   9.0, 0.0, 0);
+    assert_feq!(fminf( f32::INFINITY, -9.0),            -9.0, 0.0, 0);
+    assert_feq!(fminf(-9.0,            f32::INFINITY),  -9.0, 0.0, 0);
+
+    assert_feq!(fminf( f32::NEG_INFINITY,  9.0),               f32::NEG_INFINITY, 0.0, 0);
+    assert_feq!(fminf( 9.0,                f32::NEG_INFINITY), f32::NEG_INFINITY, 0.0, 0);
+    assert_feq!(fminf( f32::NEG_INFINITY, -9.0),               f32::NEG_INFINITY, 0.0, 0);
+    assert_feq!(fminf(-9.0,                f32::NEG_INFINITY), f32::NEG_INFINITY, 0.0, 0);
+
+    assert_feq!(fminf( f32::NAN,  9.0),       9.0,      0.0, 0);
+    assert_feq!(fminf( f32::NAN, -9.0),      -9.0,      0.0, 0);
+    assert_feq!(fminf( 9.0,       f32::NAN),  9.0,      0.0, 0);
+    assert_feq!(fminf(-9.0,       f32::NAN), -9.0,      0.0, 0);
+    assert_feq!(fminf( f32::NAN,  f32::NAN),  f32::NAN, 0.0, TEST_NAN_SIGN);
 }
 
 #[test]
 fn min_f64() {
-    assert_eq!(fmin(0.0, 0.0), 0.0);
-    assert_eq!(fmin(-10.0, 0.0), -10.0);
-    assert_eq!(fmin(0.0, -10.0), -10.0);
-    assert_eq!(fmin(f64::NAN, 0.0), 0.0);
-    assert_eq!(fmin(0.0, f64::NAN), 0.0);
-    assert!(fmin(f64::NAN, f64::NAN).is_nan());
+    assert_feq!(fmin( 0.0,  0.0),  0.0, 0.0, TEST_ZERO_SIGN);
+    assert_feq!(fmin(-0.0, -0.0), -0.0, 0.0, TEST_ZERO_SIGN);
+    assert_feq!(fmin( 9.0,  0.0),  0.0, 0.0, 0);
+    assert_feq!(fmin(-9.0, -0.0), -9.0, 0.0, TEST_ZERO_SIGN);
+    assert_feq!(fmin( 0.0,  9.0),  0.0, 0.0, 0);
+    assert_feq!(fmin(-0.0, -9.0), -9.0, 0.0, TEST_ZERO_SIGN);
+    assert_feq!(fmin( 0.0,  9.0),  0.0, 0.0, 0);
+    assert_feq!(fmin(-0.0, -9.0), -9.0, 0.0, TEST_ZERO_SIGN);
+
+
+    assert_feq!(fmin( f64::INFINITY,  9.0),             9.0, 0.0, 0);
+    assert_feq!(fmin( 9.0,            f64::INFINITY),   9.0, 0.0, 0);
+    assert_feq!(fmin( f64::INFINITY, -9.0),            -9.0, 0.0, 0);
+    assert_feq!(fmin(-9.0,            f64::INFINITY),  -9.0, 0.0, 0);
+
+    assert_feq!(fmin( f64::NEG_INFINITY,  9.0),               f64::NEG_INFINITY, 0.0, 0);
+    assert_feq!(fmin( 9.0,                f64::NEG_INFINITY), f64::NEG_INFINITY, 0.0, 0);
+    assert_feq!(fmin( f64::NEG_INFINITY, -9.0),               f64::NEG_INFINITY, 0.0, 0);
+    assert_feq!(fmin(-9.0,                f64::NEG_INFINITY), f64::NEG_INFINITY, 0.0, 0);
+
+    assert_feq!(fmin( f64::NAN,  9.0),       9.0,      0.0, 0);
+    assert_feq!(fmin( f64::NAN, -9.0),      -9.0,      0.0, 0);
+    assert_feq!(fmin( 9.0,       f64::NAN),  9.0,      0.0, 0);
+    assert_feq!(fmin(-9.0,       f64::NAN), -9.0,      0.0, 0);
+    assert_feq!(fmin( f64::NAN,  f64::NAN),  f64::NAN, 0.0, TEST_NAN_SIGN);
 }
 
 #[test]
