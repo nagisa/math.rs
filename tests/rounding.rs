@@ -65,18 +65,6 @@ fn round_f64() {
     assert_feq!(round( 2097152.5),  2097153.0, 0.0, 0);
     assert_feq!(round(-2097152.5), -2097153.0, 0.0, 0);
 
-    assert_feq!(round( 4503599627370495.5),   4503599627370496.0, 0.0, 0);
-    assert_feq!(round( 4503599627370496.25),  4503599627370496.0, 0.0, 0);
-    assert_feq!(round( 4503599627370496.75),  4503599627370497.0, 0.0, 0);
-    assert_feq!(round( 4503599627370497.5),   4503599627370498.0, 0.0, 0);
-    assert_feq!(round(-4503599627370495.5),  -4503599627370496.0, 0.0, 0);
-    assert_feq!(round(-4503599627370496.25), -4503599627370496.0, 0.0, 0);
-    assert_feq!(round(-4503599627370496.75), -4503599627370497.0, 0.0, 0);
-    assert_feq!(round(-4503599627370497.5),  -4503599627370498.0, 0.0, 0);
-    // TODO: Issues with representability? (3rd column should be 0.0)
-    assert_feq!(round( 4503599627370496.5),   4503599627370497.0, 1.0, 0);
-    assert_feq!(round(-4503599627370496.5),  -4503599627370497.0, 1.0, 0);
-
     assert_feq!(round(f64::NEG_INFINITY), f64::NEG_INFINITY, 0.0, 0);
     assert_feq!(round(f64::INFINITY),     f64::INFINITY,     0.0, 0);
 
