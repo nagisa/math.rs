@@ -144,34 +144,60 @@ fn ceil_f64() {
 
 #[test]
 fn floor_f32() {
-    assert_eq!(floorf(0.0), 0.0);
-    assert_eq!(floorf(-0.0), 0.0);
-    assert_eq!(floorf(1.0), 1.0);
-    assert_eq!(floorf(1.5), 1.0);
-    assert_eq!(floorf(-1.5), -2.0);
-    assert_eq!(floorf(-1.4), -2.0);
-    assert_eq!(floorf(-0.01), -1.0);
-    assert_eq!(floorf(0.999), 0.0);
-    assert_eq!(floorf(1.7654321E13), 1.7654321E13);
-    assert_eq!(floorf(123456789.500001), 123456789.0);
-    assert_eq!(floorf(f32::NEG_INFINITY), f32::NEG_INFINITY);
-    assert!(floorf(f32::NAN).is_nan());
+    assert_feq!(floorf( 0.0),  0.0, 0.0, TEST_ZERO_SIGN);
+    assert_feq!(floorf(-0.0), -0.0, 0.0, TEST_ZERO_SIGN);
+
+    assert_feq!(floorf( f32::consts::PI),  3.0, 0.0, 0);
+    assert_feq!(floorf(-f32::consts::PI), -4.0, 0.0, 0);
+
+    assert_feq!(floorf( F32_MIN_SUBNORM),     0.0, 0.0, TEST_ZERO_SIGN);
+    assert_feq!(floorf(-F32_MIN_SUBNORM),    -1.0, 0.0, 0);
+    assert_feq!(floorf( f32::MIN_POS_VALUE),  0.0, 0.0, TEST_ZERO_SIGN);
+    assert_feq!(floorf(-f32::MIN_POS_VALUE), -1.0, 0.0, 0);
+    assert_feq!(floorf(f32::MAX_VALUE),       f32::MAX_VALUE, 0.0, 0);
+    assert_feq!(floorf(f32::MIN_VALUE),       f32::MIN_VALUE, 0.0, 0);
+
+    assert_feq!(floorf( 0.1),                 0.0, 0.0, TEST_ZERO_SIGN);
+    assert_feq!(floorf( 0.25),                0.0, 0.0, TEST_ZERO_SIGN);
+    assert_feq!(floorf( 0.625),               0.0, 0.0, TEST_ZERO_SIGN);
+    assert_feq!(floorf(-0.1),                -1.0, 0.0, 0);
+    assert_feq!(floorf(-0.25),               -1.0, 0.0, 0);
+    assert_feq!(floorf(-0.625),              -1.0, 0.0, 0);
+
+    assert_feq!(floorf(f32::NEG_INFINITY), f32::NEG_INFINITY, 0.0, 0);
+    assert_feq!(floorf(f32::INFINITY),     f32::INFINITY,     0.0, 0);
+
+    assert_feq!(floorf( f32::NAN),  f32::NAN, 0.0, TEST_NAN_SIGN);
+    assert_feq!(floorf(-f32::NAN), -f32::NAN, 0.0, TEST_NAN_SIGN);
 }
 
 #[test]
 fn floor_f64() {
-    assert_eq!(floor(0.0), 0.0);
-    assert_eq!(floorf(-0.0), 0.0);
-    assert_eq!(floor(1.0), 1.0);
-    assert_eq!(floor(1.5), 1.0);
-    assert_eq!(floor(-1.5), -2.0);
-    assert_eq!(floor(-1.4), -2.0);
-    assert_eq!(floor(-0.01), -1.0);
-    assert_eq!(floor(0.999), 0.0);
-    assert_eq!(floor(1.7654321E13), 1.7654321E13);
-    assert_eq!(floor(123456789.500001), 123456789.0);
-    assert_eq!(floor(f64::NEG_INFINITY), f64::NEG_INFINITY);
-    assert!(floor(f64::NAN).is_nan());
+    assert_feq!(floor( 0.0),  0.0, 0.0, TEST_ZERO_SIGN);
+    assert_feq!(floor(-0.0), -0.0, 0.0, TEST_ZERO_SIGN);
+
+    assert_feq!(floor( f64::consts::PI),  3.0, 0.0, 0);
+    assert_feq!(floor(-f64::consts::PI), -4.0, 0.0, 0);
+
+    assert_feq!(floor( F64_MIN_SUBNORM),     0.0, 0.0, TEST_ZERO_SIGN);
+    assert_feq!(floor(-F64_MIN_SUBNORM),    -1.0, 0.0, 0);
+    assert_feq!(floor( f64::MIN_POS_VALUE),  0.0, 0.0, TEST_ZERO_SIGN);
+    assert_feq!(floor(-f64::MIN_POS_VALUE), -1.0, 0.0, 0);
+    assert_feq!(floor(f64::MAX_VALUE),       f64::MAX_VALUE, 0.0, 0);
+    assert_feq!(floor(f64::MIN_VALUE),       f64::MIN_VALUE, 0.0, 0);
+
+    assert_feq!(floor( 0.1),                 0.0, 0.0, TEST_ZERO_SIGN);
+    assert_feq!(floor( 0.25),                0.0, 0.0, TEST_ZERO_SIGN);
+    assert_feq!(floor( 0.625),               0.0, 0.0, TEST_ZERO_SIGN);
+    assert_feq!(floor(-0.1),                -1.0, 0.0, 0);
+    assert_feq!(floor(-0.25),               -1.0, 0.0, 0);
+    assert_feq!(floor(-0.625),              -1.0, 0.0, 0);
+
+    assert_feq!(floor(f64::NEG_INFINITY), f64::NEG_INFINITY, 0.0, 0);
+    assert_feq!(floor(f64::INFINITY),     f64::INFINITY,     0.0, 0);
+
+    assert_feq!(floor( f64::NAN),  f64::NAN, 0.0, TEST_NAN_SIGN);
+    assert_feq!(floor(-f64::NAN), -f64::NAN, 0.0, TEST_NAN_SIGN);
 }
 
 #[test]

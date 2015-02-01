@@ -12,7 +12,7 @@ pub extern fn floorf(i : f32) -> f32 {
         if bits > F32_SIGN_MASK {
             return -1.0;
         } else {
-            return 0.0;
+            return (bits & F32_SIGN_MASK).from_bits();
         }
     } else if exp == 0x80 {
         return i + i;
@@ -42,7 +42,7 @@ pub extern fn floor(i : f64) -> f64 {
         if bits > F64_SIGN_MASK {
             return -1.0;
         } else {
-            return 0.0;
+            return (bits & F64_SIGN_MASK).from_bits();
         }
     } else if exp == 0x400 {
         return i + i;
@@ -54,7 +54,7 @@ pub extern fn floor(i : f64) -> f64 {
             return i;
         }
         if bits > F64_SIGN_MASK {
-            bits += 0x0010_0000_0000_0000;
+            bits += 0x0010_0000_0000_0000 >> exp;
         }
         bits &= !mask;
     }
