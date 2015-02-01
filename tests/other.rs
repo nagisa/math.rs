@@ -4,25 +4,67 @@ extern crate math;
 use std::num::Float;
 use std::{f32, f64};
 use math::{fmaxf, fmax, fminf, fmin, hypotf, hypot};
+use testutils::*;
+
+#[macro_use]
+mod testutils;
 
 #[test]
 fn max_f32() {
-    assert_eq!(fmaxf(0.0, 0.0), 0.0);
-    assert_eq!(fmaxf(10.0, 0.0), 10.0);
-    assert_eq!(fmaxf(0.0, -10.0), 0.0);
-    assert_eq!(fmaxf(f32::NAN, 0.0), 0.0);
-    assert_eq!(fmaxf(0.0, f32::NAN), 0.0);
-    assert!(fmaxf(f32::NAN, f32::NAN).is_nan());
+    assert_feq!(fmaxf( 0.0,  0.0),  0.0, 0.0, TEST_ZERO_SIGN);
+    assert_feq!(fmaxf(-0.0, -0.0), -0.0, 0.0, TEST_ZERO_SIGN);
+    assert_feq!(fmaxf( 9.0,  0.0),  9.0, 0.0, 0);
+    assert_feq!(fmaxf(-9.0, -0.0), -0.0, 0.0, TEST_ZERO_SIGN);
+    assert_feq!(fmaxf( 0.0,  9.0),  9.0, 0.0, 0);
+    assert_feq!(fmaxf(-0.0, -9.0), -0.0, 0.0, TEST_ZERO_SIGN);
+    assert_feq!(fmaxf( 0.0,  9.0),  9.0, 0.0, 0);
+    assert_feq!(fmaxf(-0.0, -9.0), -0.0, 0.0, TEST_ZERO_SIGN);
+
+
+    assert_feq!(fmaxf( f32::INFINITY,  9.0),             f32::INFINITY, 0.0, 0);
+    assert_feq!(fmaxf( 9.0,            f32::INFINITY),   f32::INFINITY, 0.0, 0);
+    assert_feq!(fmaxf( f32::INFINITY, -9.0),             f32::INFINITY, 0.0, 0);
+    assert_feq!(fmaxf(-9.0,            f32::INFINITY),   f32::INFINITY, 0.0, 0);
+
+    assert_feq!(fmaxf( f32::NEG_INFINITY,  9.0),                9.0, 0.0, 0);
+    assert_feq!(fmaxf( 9.0,                f32::NEG_INFINITY),  9.0, 0.0, 0);
+    assert_feq!(fmaxf( f32::NEG_INFINITY, -9.0),               -9.0, 0.0, 0);
+    assert_feq!(fmaxf(-9.0,                f32::NEG_INFINITY), -9.0, 0.0, 0);
+
+    assert_feq!(fmaxf( f32::NAN,  9.0),       9.0,      0.0, 0);
+    assert_feq!(fmaxf( f32::NAN, -9.0),      -9.0,      0.0, 0);
+    assert_feq!(fmaxf( 9.0,       f32::NAN),  9.0,      0.0, 0);
+    assert_feq!(fmaxf(-9.0,       f32::NAN), -9.0,      0.0, 0);
+    assert_feq!(fmaxf( f32::NAN,  f32::NAN),  f32::NAN, 0.0, TEST_NAN_SIGN);
 }
 
 #[test]
 fn max_f64() {
-    assert_eq!(fmax(0.0, 0.0), 0.0);
-    assert_eq!(fmax(10.0, 0.0), 10.0);
-    assert_eq!(fmax(0.0, -10.0), 0.0);
-    assert_eq!(fmax(f64::NAN, 0.0), 0.0);
-    assert_eq!(fmax(0.0, f64::NAN), 0.0);
-    assert!(fmax(f64::NAN, f64::NAN).is_nan());
+    assert_feq!(fmax( 0.0,  0.0),  0.0, 0.0, TEST_ZERO_SIGN);
+    assert_feq!(fmax(-0.0, -0.0), -0.0, 0.0, TEST_ZERO_SIGN);
+    assert_feq!(fmax( 9.0,  0.0),  9.0, 0.0, 0);
+    assert_feq!(fmax(-9.0, -0.0), -0.0, 0.0, TEST_ZERO_SIGN);
+    assert_feq!(fmax( 0.0,  9.0),  9.0, 0.0, 0);
+    assert_feq!(fmax(-0.0, -9.0), -0.0, 0.0, TEST_ZERO_SIGN);
+    assert_feq!(fmax( 0.0,  9.0),  9.0, 0.0, 0);
+    assert_feq!(fmax(-0.0, -9.0), -0.0, 0.0, TEST_ZERO_SIGN);
+
+
+    assert_feq!(fmax( f64::INFINITY,  9.0),             f64::INFINITY, 0.0, 0);
+    assert_feq!(fmax( 9.0,            f64::INFINITY),   f64::INFINITY, 0.0, 0);
+    assert_feq!(fmax( f64::INFINITY, -9.0),             f64::INFINITY, 0.0, 0);
+    assert_feq!(fmax(-9.0,            f64::INFINITY),   f64::INFINITY, 0.0, 0);
+
+    assert_feq!(fmax( f64::NEG_INFINITY,  9.0),                9.0, 0.0, 0);
+    assert_feq!(fmax( 9.0,                f64::NEG_INFINITY),  9.0, 0.0, 0);
+    assert_feq!(fmax( f64::NEG_INFINITY, -9.0),               -9.0, 0.0, 0);
+    assert_feq!(fmax(-9.0,                f64::NEG_INFINITY), -9.0, 0.0, 0);
+
+    assert_feq!(fmax( f64::NAN,  9.0),       9.0,      0.0, 0);
+    assert_feq!(fmax( f64::NAN, -9.0),      -9.0,      0.0, 0);
+    assert_feq!(fmax( 9.0,       f64::NAN),  9.0,      0.0, 0);
+    assert_feq!(fmax(-9.0,       f64::NAN), -9.0,      0.0, 0);
+    assert_feq!(fmax( f64::NAN,  f64::NAN),  f64::NAN, 0.0, TEST_NAN_SIGN);
 }
 
 #[test]
