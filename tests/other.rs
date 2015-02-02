@@ -1,4 +1,4 @@
-#![feature(std_misc)]
+#![feature(core, std_misc)]
 extern crate math;
 
 use std::num::Float;
@@ -127,22 +127,44 @@ fn min_f64() {
 
 #[test]
 fn hypot_f32() {
-    assert_eq!(hypotf(3.0, 4.0), 5.0);
-    assert_eq!(hypotf(-3.0, -4.0), 5.0);
-    assert_eq!(hypotf(f32::INFINITY, -4.0), f32::INFINITY);
-    assert_eq!(hypotf(0.0, f32::NEG_INFINITY), f32::INFINITY);
-    assert!(hypotf(f32::NAN, 0.0).is_nan());
-    assert_eq!(hypotf(f32::INFINITY, f32::NAN), f32::INFINITY);
-    assert_eq!(hypotf(f32::NAN, f32::INFINITY), f32::INFINITY);
+    assert_feq!(hypotf(f32::consts::PI, 0.0),  f32::consts::PI, 0.0, 0);
+    assert_feq!(hypotf(0.0, -f32::consts::PI), f32::consts::PI, 0.0, 0);
+    assert_feq!(hypotf(3.0, 4.0),              5.0,             0.0, 0);
+    assert_feq!(hypotf(-3.0, -4.0),            5.0,             0.0, 0);
+
+    assert_feq!(hypotf(f32::INFINITY, 0.0),     f32::INFINITY, 0.0, 0);
+    assert_feq!(hypotf(f32::NEG_INFINITY, 0.0), f32::INFINITY, 0.0, 0);
+    assert_feq!(hypotf(0.0, f32::INFINITY),     f32::INFINITY, 0.0, 0);
+    assert_feq!(hypotf(0.0, f32::NEG_INFINITY), f32::INFINITY, 0.0, 0);
+
+    assert_feq!(hypotf( f32::INFINITY, f32::NAN),     f32::INFINITY, 0.0, 0);
+    assert_feq!(hypotf( f32::NAN, f32::INFINITY),     f32::INFINITY, 0.0, 0);
+    assert_feq!(hypotf( f32::NEG_INFINITY, f32::NAN), f32::INFINITY, 0.0, 0);
+    assert_feq!(hypotf( f32::NAN, f32::NEG_INFINITY), f32::INFINITY, 0.0, 0);
+    // Sign of NaN is not specified
+    assert_feq!(hypotf( f32::NAN,  0.0),              f32::NAN,      0.0, 0);
+    assert_feq!(hypotf(-f32::NAN,  0.0),              f32::NAN,      0.0, 0);
+    assert_feq!(hypotf( f32::NAN, -f32::NAN),         f32::NAN,      0.0, 0);
 }
 
 #[test]
 fn hypot_f64() {
-    assert_eq!(hypot(3.0, 4.0), 5.0);
-    assert_eq!(hypot(-3.0, -4.0), 5.0);
-    assert_eq!(hypot(f64::INFINITY, -4.0), f64::INFINITY);
-    assert_eq!(hypot(0.0, f64::NEG_INFINITY), f64::INFINITY);
-    assert!(hypot(f64::NAN, 0.0).is_nan());
-    assert_eq!(hypot(f64::INFINITY, f64::NAN), f64::INFINITY);
-    assert_eq!(hypot(f64::NAN, f64::INFINITY), f64::INFINITY);
+    assert_feq!(hypot(f64::consts::PI, 0.0),  f64::consts::PI, 0.0, 0);
+    assert_feq!(hypot(0.0, -f64::consts::PI), f64::consts::PI, 0.0, 0);
+    assert_feq!(hypot(3.0, 4.0),              5.0,             0.0, 0);
+    assert_feq!(hypot(-3.0, -4.0),            5.0,             0.0, 0);
+
+    assert_feq!(hypot(f64::INFINITY, 0.0),     f64::INFINITY, 0.0, 0);
+    assert_feq!(hypot(f64::NEG_INFINITY, 0.0), f64::INFINITY, 0.0, 0);
+    assert_feq!(hypot(0.0, f64::INFINITY),     f64::INFINITY, 0.0, 0);
+    assert_feq!(hypot(0.0, f64::NEG_INFINITY), f64::INFINITY, 0.0, 0);
+
+    assert_feq!(hypot( f64::INFINITY, f64::NAN),     f64::INFINITY, 0.0, 0);
+    assert_feq!(hypot( f64::NAN, f64::INFINITY),     f64::INFINITY, 0.0, 0);
+    assert_feq!(hypot( f64::NEG_INFINITY, f64::NAN), f64::INFINITY, 0.0, 0);
+    assert_feq!(hypot( f64::NAN, f64::NEG_INFINITY), f64::INFINITY, 0.0, 0);
+    // Sign of NaN is not specified
+    assert_feq!(hypot( f64::NAN,  0.0),              f64::NAN,      0.0, 0);
+    assert_feq!(hypot(-f64::NAN,  0.0),              f64::NAN,      0.0, 0);
+    assert_feq!(hypot( f64::NAN, -f64::NAN),         f64::NAN,      0.0, 0);
 }
