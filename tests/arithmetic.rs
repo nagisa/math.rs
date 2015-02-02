@@ -5,26 +5,80 @@ use std::{f32, f64};
 
 use math::{fdimf, fdim};
 // use math::{fmodf, fmod};
+use testutils::*;
+
+
+#[macro_use]
+mod testutils;
+
 
 #[test]
 fn dim_f32() {
-    assert_eq!(fdimf(10.0, 20.0), 0.0);
-    assert_eq!(fdimf(20.0, -20.0), 40.0);
-    assert!(fdimf(f32::NAN, 0.0).is_nan());
-    assert!(fdimf(1.0, f32::NAN).is_nan());
-    assert_eq!(fdimf(f32::MAX_VALUE, f32::MIN_VALUE), f32::INFINITY);
+    assert_feq!(fdimf( 0.0,  0.0), 0.0, 0.0, 0);
+    assert_feq!(fdimf( 9.0,  0.0), 9.0, 0.0, 0);
+    assert_feq!(fdimf( 0.0,  9.0), 0.0, 0.0, 0);
+    assert_feq!(fdimf(-9.0,  0.0), 0.0, 0.0, 0);
+    assert_feq!(fdimf( 0.0, -9.0), 9.0, 0.0, 0);
+
+    assert_feq!(fdimf(f32::INFINITY, 9.0),                   f32::INFINITY, 0.0, 0);
+    assert_feq!(fdimf(f32::INFINITY, -9.0),                  f32::INFINITY, 0.0, 0);
+    assert_feq!(fdimf(f32::NEG_INFINITY, 9.0),               0.0,           0.0, 0);
+    assert_feq!(fdimf(f32::NEG_INFINITY, -9.0),              0.0,           0.0, 0);
+    assert_feq!(fdimf( 9.0, f32::NEG_INFINITY),              f32::INFINITY, 0.0, 0);
+    assert_feq!(fdimf(-9.0, f32::NEG_INFINITY),              f32::INFINITY, 0.0, 0);
+    assert_feq!(fdimf( 9.0, f32::INFINITY),                  0.0,           0.0, 0);
+    assert_feq!(fdimf(-9.0, f32::INFINITY),                  0.0,           0.0, 0);
+    assert_feq!(fdimf(f32::INFINITY, f32::INFINITY),         0.0,           0.0, 0);
+    assert_feq!(fdimf(f32::INFINITY, f32::NEG_INFINITY),     f32::INFINITY, 0.0, 0);
+    assert_feq!(fdimf(f32::NEG_INFINITY, f32::INFINITY),     0.0,           0.0, 0);
+    assert_feq!(fdimf(f32::NEG_INFINITY, f32::NEG_INFINITY), 0.0,           0.0, 0);
+
+    assert_feq!(fdimf(0.0, f32::NAN),               f32::NAN, 0.0, 0);
+    assert_feq!(fdimf(9.0, f32::NAN),               f32::NAN, 0.0, 0);
+    assert_feq!(fdimf(-9.0, f32::NAN),              f32::NAN, 0.0, 0);
+    assert_feq!(fdimf(f32::INFINITY, f32::NAN),     f32::NAN, 0.0, 0);
+    assert_feq!(fdimf(f32::NEG_INFINITY, f32::NAN), f32::NAN, 0.0, 0);
+    assert_feq!(fdimf(f32::NAN, 0.0),               f32::NAN, 0.0, 0);
+    assert_feq!(fdimf(f32::NAN, 9.0),               f32::NAN, 0.0, 0);
+    assert_feq!(fdimf(f32::NAN, -9.0),              f32::NAN, 0.0, 0);
+    assert_feq!(fdimf(f32::NAN, f32::INFINITY),     f32::NAN, 0.0, 0);
+    assert_feq!(fdimf(f32::NAN, f32::NEG_INFINITY), f32::NAN, 0.0, 0);
+    assert_feq!(fdimf(f32::NAN, f32::NAN),          f32::NAN, 0.0, 0);
 }
+
 
 #[test]
 fn dim_f64() {
-    assert_eq!(fdim(10.0, 20.0), 0.0);
-    assert_eq!(fdim(20.0, -20.0), 40.0);
-    assert_eq!(fdim(1E100, -1E100), 2E100);
-    assert!(fdim(f64::NAN, 0.0).is_nan());
-    assert!(fdim(1.0, f64::NAN).is_nan());
-    assert_eq!(fdim(f64::INFINITY, f64::NEG_INFINITY), f64::INFINITY);
-    assert_eq!(fdim(f64::NEG_INFINITY, f64::INFINITY), 0.0);
-    assert_eq!(fdim(f64::MAX_VALUE, f64::MIN_VALUE), f64::INFINITY);
+    assert_feq!(fdim( 0.0,  0.0), 0.0, 0.0, 0);
+    assert_feq!(fdim( 9.0,  0.0), 9.0, 0.0, 0);
+    assert_feq!(fdim( 0.0,  9.0), 0.0, 0.0, 0);
+    assert_feq!(fdim(-9.0,  0.0), 0.0, 0.0, 0);
+    assert_feq!(fdim( 0.0, -9.0), 9.0, 0.0, 0);
+
+    assert_feq!(fdim(f64::INFINITY, 9.0),                   f64::INFINITY, 0.0, 0);
+    assert_feq!(fdim(f64::INFINITY, -9.0),                  f64::INFINITY, 0.0, 0);
+    assert_feq!(fdim(f64::NEG_INFINITY, 9.0),               0.0,           0.0, 0);
+    assert_feq!(fdim(f64::NEG_INFINITY, -9.0),              0.0,           0.0, 0);
+    assert_feq!(fdim( 9.0, f64::NEG_INFINITY),              f64::INFINITY, 0.0, 0);
+    assert_feq!(fdim(-9.0, f64::NEG_INFINITY),              f64::INFINITY, 0.0, 0);
+    assert_feq!(fdim( 9.0, f64::INFINITY),                  0.0,           0.0, 0);
+    assert_feq!(fdim(-9.0, f64::INFINITY),                  0.0,           0.0, 0);
+    assert_feq!(fdim(f64::INFINITY, f64::INFINITY),         0.0,           0.0, 0);
+    assert_feq!(fdim(f64::INFINITY, f64::NEG_INFINITY),     f64::INFINITY, 0.0, 0);
+    assert_feq!(fdim(f64::NEG_INFINITY, f64::INFINITY),     0.0,           0.0, 0);
+    assert_feq!(fdim(f64::NEG_INFINITY, f64::NEG_INFINITY), 0.0,           0.0, 0);
+
+    assert_feq!(fdim(0.0, f64::NAN),               f64::NAN, 0.0, 0);
+    assert_feq!(fdim(9.0, f64::NAN),               f64::NAN, 0.0, 0);
+    assert_feq!(fdim(-9.0, f64::NAN),              f64::NAN, 0.0, 0);
+    assert_feq!(fdim(f64::INFINITY, f64::NAN),     f64::NAN, 0.0, 0);
+    assert_feq!(fdim(f64::NEG_INFINITY, f64::NAN), f64::NAN, 0.0, 0);
+    assert_feq!(fdim(f64::NAN, 0.0),               f64::NAN, 0.0, 0);
+    assert_feq!(fdim(f64::NAN, 9.0),               f64::NAN, 0.0, 0);
+    assert_feq!(fdim(f64::NAN, -9.0),              f64::NAN, 0.0, 0);
+    assert_feq!(fdim(f64::NAN, f64::INFINITY),     f64::NAN, 0.0, 0);
+    assert_feq!(fdim(f64::NAN, f64::NEG_INFINITY), f64::NAN, 0.0, 0);
+    assert_feq!(fdim(f64::NAN, f64::NAN),          f64::NAN, 0.0, 0);
 }
 
 
