@@ -1,8 +1,6 @@
-#![feature(std_misc, core)]
 extern crate math;
 
 use std::{f32, f64};
-use std::num::Float;
 use testutils::*;
 
 #[macro_use]
@@ -82,10 +80,10 @@ fn ceil_f32() {
 
     assert_feq!(ceilf( F32_MIN_SUBNORM),     1.0, 0.0, 0);
     assert_feq!(ceilf(-F32_MIN_SUBNORM),    -0.0, 0.0, TEST_ZERO_SIGN);
-    assert_feq!(ceilf( f32::MIN_POS_VALUE),  1.0, 0.0, 0);
-    assert_feq!(ceilf(-f32::MIN_POS_VALUE), -0.0, 0.0, TEST_ZERO_SIGN);
-    assert_feq!(ceilf(f32::MAX_VALUE),       f32::MAX_VALUE, 0.0, 0);
-    assert_feq!(ceilf(f32::MIN_VALUE),       f32::MIN_VALUE, 0.0, 0);
+    assert_feq!(ceilf( f32::MIN_POSITIVE),  1.0, 0.0, 0);
+    assert_feq!(ceilf(-f32::MIN_POSITIVE), -0.0, 0.0, TEST_ZERO_SIGN);
+    assert_feq!(ceilf(f32::MAX),       f32::MAX, 0.0, 0);
+    assert_feq!(ceilf(f32::MIN),       f32::MIN, 0.0, 0);
 
     assert_feq!(ceilf( 0.1),                 1.0, 0.0, 0);
     assert_feq!(ceilf( 0.25),                1.0, 0.0, 0);
@@ -111,10 +109,10 @@ fn ceil_f64() {
 
     assert_feq!(ceil( F64_MIN_SUBNORM),     1.0, 0.0, 0);
     assert_feq!(ceil(-F64_MIN_SUBNORM),    -0.0, 0.0, TEST_ZERO_SIGN);
-    assert_feq!(ceil( f64::MIN_POS_VALUE),  1.0, 0.0, 0);
-    assert_feq!(ceil(-f64::MIN_POS_VALUE), -0.0, 0.0, TEST_ZERO_SIGN);
-    assert_feq!(ceil(f64::MAX_VALUE),       f64::MAX_VALUE, 0.0, 0);
-    assert_feq!(ceil(f64::MIN_VALUE),       f64::MIN_VALUE, 0.0, 0);
+    assert_feq!(ceil( f64::MIN_POSITIVE),  1.0, 0.0, 0);
+    assert_feq!(ceil(-f64::MIN_POSITIVE), -0.0, 0.0, TEST_ZERO_SIGN);
+    assert_feq!(ceil(f64::MAX),       f64::MAX, 0.0, 0);
+    assert_feq!(ceil(f64::MIN),       f64::MIN, 0.0, 0);
 
     assert_feq!(ceil( 0.1),                 1.0, 0.0, 0);
     assert_feq!(ceil( 0.25),                1.0, 0.0, 0);
@@ -140,10 +138,10 @@ fn floor_f32() {
 
     assert_feq!(floorf( F32_MIN_SUBNORM),     0.0, 0.0, TEST_ZERO_SIGN);
     assert_feq!(floorf(-F32_MIN_SUBNORM),    -1.0, 0.0, 0);
-    assert_feq!(floorf( f32::MIN_POS_VALUE),  0.0, 0.0, TEST_ZERO_SIGN);
-    assert_feq!(floorf(-f32::MIN_POS_VALUE), -1.0, 0.0, 0);
-    assert_feq!(floorf(f32::MAX_VALUE),       f32::MAX_VALUE, 0.0, 0);
-    assert_feq!(floorf(f32::MIN_VALUE),       f32::MIN_VALUE, 0.0, 0);
+    assert_feq!(floorf( f32::MIN_POSITIVE),  0.0, 0.0, TEST_ZERO_SIGN);
+    assert_feq!(floorf(-f32::MIN_POSITIVE), -1.0, 0.0, 0);
+    assert_feq!(floorf(f32::MAX),       f32::MAX, 0.0, 0);
+    assert_feq!(floorf(f32::MIN),       f32::MIN, 0.0, 0);
 
     assert_feq!(floorf( 0.1),                 0.0, 0.0, TEST_ZERO_SIGN);
     assert_feq!(floorf( 0.25),                0.0, 0.0, TEST_ZERO_SIGN);
@@ -169,10 +167,10 @@ fn floor_f64() {
 
     assert_feq!(floor( F64_MIN_SUBNORM),     0.0, 0.0, TEST_ZERO_SIGN);
     assert_feq!(floor(-F64_MIN_SUBNORM),    -1.0, 0.0, 0);
-    assert_feq!(floor( f64::MIN_POS_VALUE),  0.0, 0.0, TEST_ZERO_SIGN);
-    assert_feq!(floor(-f64::MIN_POS_VALUE), -1.0, 0.0, 0);
-    assert_feq!(floor(f64::MAX_VALUE),       f64::MAX_VALUE, 0.0, 0);
-    assert_feq!(floor(f64::MIN_VALUE),       f64::MIN_VALUE, 0.0, 0);
+    assert_feq!(floor( f64::MIN_POSITIVE),  0.0, 0.0, TEST_ZERO_SIGN);
+    assert_feq!(floor(-f64::MIN_POSITIVE), -1.0, 0.0, 0);
+    assert_feq!(floor(f64::MAX),       f64::MAX, 0.0, 0);
+    assert_feq!(floor(f64::MIN),       f64::MIN, 0.0, 0);
 
     assert_feq!(floor( 0.1),                 0.0, 0.0, TEST_ZERO_SIGN);
     assert_feq!(floor( 0.25),                0.0, 0.0, TEST_ZERO_SIGN);
@@ -198,10 +196,10 @@ fn trunc_f32() {
 
     assert_feq!(truncf( F32_MIN_SUBNORM),     0.0, 0.0, TEST_ZERO_SIGN);
     assert_feq!(truncf(-F32_MIN_SUBNORM),    -0.0, 0.0, TEST_ZERO_SIGN);
-    assert_feq!(truncf( f32::MIN_POS_VALUE),  0.0, 0.0, TEST_ZERO_SIGN);
-    assert_feq!(truncf(-f32::MIN_POS_VALUE), -0.0, 0.0, TEST_ZERO_SIGN);
-    assert_feq!(truncf(f32::MAX_VALUE),       f32::MAX_VALUE, 0.0, 0);
-    assert_feq!(truncf(f32::MIN_VALUE),       f32::MIN_VALUE, 0.0, 0);
+    assert_feq!(truncf( f32::MIN_POSITIVE),  0.0, 0.0, TEST_ZERO_SIGN);
+    assert_feq!(truncf(-f32::MIN_POSITIVE), -0.0, 0.0, TEST_ZERO_SIGN);
+    assert_feq!(truncf(f32::MAX),       f32::MAX, 0.0, 0);
+    assert_feq!(truncf(f32::MIN),       f32::MIN, 0.0, 0);
 
     assert_feq!(truncf( 0.1),                 0.0,          0.0, TEST_ZERO_SIGN);
     assert_feq!(truncf( 0.25),                0.0,          0.0, TEST_ZERO_SIGN);
@@ -237,10 +235,10 @@ fn trunc_f64() {
 
     assert_feq!(trunc( F64_MIN_SUBNORM),     0.0, 0.0, TEST_ZERO_SIGN);
     assert_feq!(trunc(-F64_MIN_SUBNORM),    -0.0, 0.0, TEST_ZERO_SIGN);
-    assert_feq!(trunc( f64::MIN_POS_VALUE),  0.0, 0.0, TEST_ZERO_SIGN);
-    assert_feq!(trunc(-f64::MIN_POS_VALUE), -0.0, 0.0, TEST_ZERO_SIGN);
-    assert_feq!(trunc(f64::MAX_VALUE),       f64::MAX_VALUE, 0.0, 0);
-    assert_feq!(trunc(f64::MIN_VALUE),       f64::MIN_VALUE, 0.0, 0);
+    assert_feq!(trunc( f64::MIN_POSITIVE),  0.0, 0.0, TEST_ZERO_SIGN);
+    assert_feq!(trunc(-f64::MIN_POSITIVE), -0.0, 0.0, TEST_ZERO_SIGN);
+    assert_feq!(trunc(f64::MAX),       f64::MAX, 0.0, 0);
+    assert_feq!(trunc(f64::MIN),       f64::MIN, 0.0, 0);
 
     assert_feq!(trunc( 0.1),                 0.0,          0.0, TEST_ZERO_SIGN);
     assert_feq!(trunc( 0.25),                0.0,          0.0, TEST_ZERO_SIGN);

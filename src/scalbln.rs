@@ -7,14 +7,14 @@ use utils::{F32_SIGN_MASK, F32_EXP_MASK, F32_MAX_EXP, F32_MIN_EXP, F32_DENORMAL_
 use utils::{F64_SIGN_MASK, F64_EXP_MASK, F64_MAX_EXP, F64_MIN_EXP, F64_DENORMAL_EXP, F64_NAN_EXP};
 use copysign::{copysignf, copysign};
 
-const F32_TWO25 : f32 = 3.355443200e+07; // 0x4c00_0000
-const F32_TWOM25 : f32 = 2.9802322388e-08; // 0x3300_0000
-const F64_TWO54 : f64 = 1.80143985094819840000e+16;  // 0x4350_0000_0000_0000
-const F64_TWOM54 : f64 = 5.55111512312578270212e-17; // 0x3C90_0000_0000_0000
+const F32_TWO25: f32 = 3.355443200e+07; // 0x4c00_0000
+const F32_TWOM25: f32 = 2.9802322388e-08; // 0x3300_0000
+const F64_TWO54: f64 = 1.80143985094819840000e+16;  // 0x4350_0000_0000_0000
+const F64_TWOM54: f64 = 5.55111512312578270212e-17; // 0x3C90_0000_0000_0000
 
 /// Multiply the 32-bit floating-point number by integral power of radix.
 #[no_mangle]
-pub extern fn scalblnf(i: f32, x: c_long) -> f32 {
+pub extern "C" fn scalblnf(i: f32, x: c_long) -> f32 {
     let mut bits = i.as_bits();
     let exp = bits.get_exponent();
     // TODO: switch to unchecked_add, we check for overflows ourselves
@@ -50,7 +50,7 @@ pub extern fn scalblnf(i: f32, x: c_long) -> f32 {
 
 /// Multiply the 64-bit floating-point number by integral power of radix.
 #[no_mangle]
-pub extern fn scalbln(i: f64, x: c_long) -> f64 {
+pub extern "C" fn scalbln(i: f64, x: c_long) -> f64 {
     let mut bits = i.as_bits();
     let exp = bits.get_exponent();
     let mut expx = exp + (x as i32);
@@ -68,7 +68,7 @@ pub extern fn scalbln(i: f64, x: c_long) -> f64 {
     if expx > F64_MAX_EXP || x > 5000 {
         // Overflow
         return copysign(f64::INFINITY, i);
-    } else if expx < F64_MIN_EXP || x < -5000  {
+    } else if expx < F64_MIN_EXP || x < -5000 {
         // Underflow
         return copysign(0.0, i);
     }

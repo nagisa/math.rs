@@ -1,7 +1,5 @@
-#![feature(core, std_misc)]
 extern crate math;
 
-use std::num::Float;
 use std::{f32, f64};
 use math::{fmaxf, fmax, fminf, fmin, hypotf, hypot};
 use testutils::*;

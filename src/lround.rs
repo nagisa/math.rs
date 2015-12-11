@@ -9,12 +9,16 @@ use utils::{F32_SIGN_MASK, F64_SIGN_MASK, F32_MANTISSA_MASK, F64_MANTISSA_MASK};
 ///
 /// If the number is ∞, NaN or doesn’t fit into the result value, arbitrary value may be returned.
 #[no_mangle]
-pub extern fn lroundf(i : f32) -> c_long {
+pub extern "C" fn lroundf(i: f32) -> c_long {
     let mut bits = i.as_bits();
     let exp = bits.get_exponent();
     // Minus one, because one bit has to be reserved for sign.
     let target_size = 8 * size_of::<c_long>() - 1;
-    let sign = if bits & F32_SIGN_MASK == 0 { 1 } else { -1 };
+    let sign = if bits & F32_SIGN_MASK == 0 {
+        1
+    } else {
+        -1
+    };
 
     if exp < -1 {
         return 0;
@@ -39,12 +43,16 @@ pub extern fn lroundf(i : f32) -> c_long {
 ///
 /// If the number is ∞, NaN or doesn’t fit into the result value, arbitrary value may be returned.
 #[no_mangle]
-pub extern fn lround(i : f64) -> c_long {
+pub extern "C" fn lround(i: f64) -> c_long {
     // Same thing as lroundf with constants adapted.
     let mut bits = i.as_bits();
     let exp = bits.get_exponent();
     let target_size = 8 * size_of::<c_long>() - 1;
-    let sign = if bits & F64_SIGN_MASK == 0 { 1 } else { -1 };
+    let sign = if bits & F64_SIGN_MASK == 0 {
+        1
+    } else {
+        -1
+    };
 
     if exp < -1 {
         return 0;

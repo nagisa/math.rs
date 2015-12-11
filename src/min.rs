@@ -1,11 +1,9 @@
-use core::num::Float;
-
 /// Returns the smaller of two 32-bit floating point numbers.
 ///
 /// If one of the arguments is NaN, the other argument is returned.
 /// If both arguments are NaN, NaN is returned.
 #[no_mangle]
-pub extern fn fminf(l: f32, r: f32) -> f32 {
+pub extern "C" fn fminf(l: f32, r: f32) -> f32 {
     if l <= r || r.is_nan() {
         l
     } else {
@@ -18,7 +16,7 @@ pub extern fn fminf(l: f32, r: f32) -> f32 {
 /// If one of the arguments is NaN, the other argument is returned.
 /// If both arguments are NaN, NaN is returned.
 #[no_mangle]
-pub extern fn fmin(l: f64, r: f64) -> f64 {
+pub extern "C" fn fmin(l: f64, r: f64) -> f64 {
     if l <= r || r.is_nan() {
         l
     } else {

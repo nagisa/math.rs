@@ -1,8 +1,6 @@
-use core::num::Float;
-
 use utils::{AsBits, Bits};
-use utils::{F32_SIGN_MASK};
-use utils::{F64_SIGN_MASK};
+use utils::F32_SIGN_MASK;
+use utils::F64_SIGN_MASK;
 
 /// Calculate next representable floating-point value following `i` in direction of `d`
 ///
@@ -10,7 +8,7 @@ use utils::{F64_SIGN_MASK};
 /// * If `d` > `i`, function returns smallest representable number more than `i`;
 /// * If `d` = `i`, function returns `d`.
 #[no_mangle]
-pub extern fn nextafterf(i: f32, d: f32) -> f32 {
+pub extern "C" fn nextafterf(i: f32, d: f32) -> f32 {
     let mut ibits = i.as_bits();
     let dbits = d.as_bits();
     if i == d {
@@ -46,7 +44,7 @@ pub extern fn nextafterf(i: f32, d: f32) -> f32 {
 /// * If `d` > `i`, function returns smallest representable number more than `i`;
 /// * If `d` = `i`, function returns `d`.
 #[no_mangle]
-pub extern fn nextafter(i: f64, d: f64) -> f64 {
+pub extern "C" fn nextafter(i: f64, d: f64) -> f64 {
     let mut ibits = i.as_bits();
     let dbits = d.as_bits();
     if i == d {

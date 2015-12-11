@@ -6,9 +6,8 @@
 
 use core::f64;
 use core::f64::consts::{PI, FRAC_PI_2, FRAC_PI_4};
-use core::num::Float;
 
-use utils::{FRAC_3PI_4};
+use utils::FRAC_3PI_4;
 use copysign::copysign;
 
 fn _tan(i: f64) -> f64 {
@@ -32,8 +31,8 @@ fn _tan(i: f64) -> f64 {
     let i6 = i4 * i2;
     let i10 = i6 * i4;
 
-    return i + (i2 * D3 * i) + (i4 * D5 * i) + (i6 * D7 * i) + (i4 * D9 * i4 * i)
-             + (i10 * D11 * i) + (i10 * D13 * i2 * i);
+    return i + (i2 * D3 * i) + (i4 * D5 * i) + (i6 * D7 * i) + (i4 * D9 * i4 * i) +
+           (i10 * D11 * i) + (i10 * D13 * i2 * i);
 }
 
 fn _ctg(i: f64) -> f64 {
@@ -54,13 +53,13 @@ fn _ctg(i: f64) -> f64 {
     let i2 = i * i;
     let i4 = i2 * i2;
 
-    return (i * D1) + (i2 * D3 * i) + (i4 * D5 * i) + (i4 * D7 * i2 * i) + (i4 * D9 * i4 * i)
-                    + i.recip();
+    return (i * D1) + (i2 * D3 * i) + (i4 * D5 * i) + (i4 * D7 * i2 * i) + (i4 * D9 * i4 * i) +
+           i.recip();
 }
 
 
 /// Calculate a tangent
-pub extern fn tan(i: f64) -> f64 {
+pub extern "C" fn tan(i: f64) -> f64 {
     // If x is not finite, the function must return a NAN.
     if !i.is_finite() {
         return f64::NAN;
@@ -78,6 +77,6 @@ pub extern fn tan(i: f64) -> f64 {
     }
 }
 
-pub extern fn tanf(i: f32) -> f32 {
+pub extern "C" fn tanf(i: f32) -> f32 {
     tan(i as f64) as f32
 }

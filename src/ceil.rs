@@ -3,7 +3,7 @@ use utils::{F32_SIGN_MASK, F64_SIGN_MASK, F32_MANTISSA_MASK, F64_MANTISSA_MASK};
 
 /// Round the 32-bit floating-point number towards +∞ (positive infinity).
 #[no_mangle]
-pub extern fn ceilf(i : f32) -> f32 {
+pub extern "C" fn ceilf(i: f32) -> f32 {
     let mut bits = i.as_bits();
     let exp = bits.get_exponent();
 
@@ -32,7 +32,7 @@ pub extern fn ceilf(i : f32) -> f32 {
 
 /// Round the 64-bit floating-point number towards +∞ (positive infinity).
 #[no_mangle]
-pub extern fn ceil(i : f64) -> f64 {
+pub extern "C" fn ceil(i: f64) -> f64 {
     let mut bits = i.as_bits();
     let exp = bits.get_exponent();
 

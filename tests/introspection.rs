@@ -1,7 +1,5 @@
-#![feature(std_misc)]
 extern crate math;
 
-use std::num::Float;
 use std::{f32, f64};
 use math::{logbf, logb, ilogbf, ilogb, FP_ILOGB0, FP_ILOGBNAN};
 use math::{scalbnf, scalbn};

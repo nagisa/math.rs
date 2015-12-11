@@ -15,12 +15,11 @@
 // _sin function will deal with calculating sine in the reduced range.
 
 use core::f64;
-use core::f64::consts::{PI_2, PI, FRAC_PI_2, FRAC_PI_4};
-use core::num::Float;
+use core::f64::consts::{PI, FRAC_PI_2, FRAC_PI_4};
 
-use utils::{FRAC_3PI_4, FRAC_5PI_4, FRAC_3PI_2, FRAC_7PI_4};
-use copysign::{copysign};
-use cos::{_cos};
+use utils::{FRAC_3PI_4, FRAC_5PI_4, FRAC_3PI_2, FRAC_7PI_4, PI_2};
+use copysign::copysign;
+use cos::_cos;
 
 
 pub fn _sin(i: f64) -> f64 {
@@ -31,23 +30,23 @@ pub fn _sin(i: f64) -> f64 {
     // x - --- + ----- - ------ + -------- - ---------- + ---------- - …
     //      3!     5!      7!        9!          11!         13!
     const D3: f64 = -1.666666666666666666666666666666E-1;
-    const D5: f64 =  8.333333333333333333333333333333E-3;
+    const D5: f64 = 8.333333333333333333333333333333E-3;
     const D7: f64 = -1.984126984126984126984126984126E-4;
-    const D9: f64 =  2.755731922398589065255731922398E-6;
+    const D9: f64 = 2.755731922398589065255731922398E-6;
     const D11: f64 = -2.505210838544171877505210838544E-8;
-    const D13: f64 =  1.605904383682161459939237717015E-10;
+    const D13: f64 = 1.605904383682161459939237717015E-10;
     let i2 = i * i;
     let i4 = i2 * i2;
     let i6 = i4 * i2;
     let i10 = i6 * i4;
 
-    return i + (i2 * D3 * i) + (i4 * D5 * i) + (i6 * D7 * i) + (i4 * D9 * i4 * i)
-             + (i10 * D11 * i) + (i10 * D13 * i2 * i);
+    return i + (i2 * D3 * i) + (i4 * D5 * i) + (i6 * D7 * i) + (i4 * D9 * i4 * i) +
+           (i10 * D11 * i) + (i10 * D13 * i2 * i);
 }
 
 /// Calculate the sine of an input.
 #[no_mangle]
-pub extern fn sin(mut i: f64) -> f64 {
+pub extern "C" fn sin(mut i: f64) -> f64 {
     // If x is not finite, the function must return a NAN.
     if !i.is_finite() {
         return f64::NAN;
@@ -77,6 +76,6 @@ pub extern fn sin(mut i: f64) -> f64 {
 
 /// Calculate the sine of an input.
 #[no_mangle]
-pub extern fn sinf(i: f32) -> f32 {
+pub extern "C" fn sinf(i: f32) -> f32 {
     sin(i as f64) as f32
 }

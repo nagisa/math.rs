@@ -1,31 +1,73 @@
 use std::mem::transmute;
-use std::num::Float;
 use std::fmt::UpperExp;
+use std::{f32, f64};
+use std::ops::{Sub, Add};
 
 pub const TEST_NAN_SIGN: u32 = 1 << 0;
 pub const TEST_ZERO_SIGN: u32 = 1 << 1;
 
+#[allow(dead_code)]
 pub const F32_MIN_SUBNORM: f32 = 1.4E-45;
+#[allow(dead_code)]
 pub const F64_MIN_SUBNORM: f64 = 4.94065645841246544176568792868E-324;
 
-pub trait SignBit {
+pub trait Float: PartialEq + PartialOrd + Sub + Add + Copy {
     fn signbit(self) -> bool;
+    fn abs(self) -> Self;
+    fn zero() -> Self;
+    fn is_infinite(self) -> bool;
+    fn is_nan(self) -> bool;
+    fn is_finite(self) -> bool;
 }
 
-impl SignBit for f32 {
+impl Float for f32 {
     fn signbit(self) -> bool {
         unsafe{transmute::<f32, u32>(self) & 0x8000_0000u32 > 0 }
     }
-}
-
-impl SignBit for f64 {
-    fn signbit(self) -> bool {
-        unsafe{transmute::<f64, u64>(self) & 0x8000_0000_0000_0000u64 > 0 }
+    fn abs(self) -> Self {
+        if self.signbit() {
+            -self
+        } else {
+            self
+        }
+    }
+    fn zero() -> Self { 0.0 }
+    fn is_infinite(self) -> bool {
+        f32::is_infinite(self)
+    }
+    fn is_nan(self) -> bool {
+        f32::is_nan(self)
+    }
+    fn is_finite(self) -> bool {
+        f32::is_finite(self)
     }
 }
 
-pub fn _assert_feq<F: Float + SignBit + UpperExp>(i: F, o: F, maxdiff: F, flags: u32) -> Option<String> {
-    use std::num::Float;
+impl Float for f64 {
+    fn signbit(self) -> bool {
+        unsafe{transmute::<f64, u64>(self) & 0x8000_0000_0000_0000u64 > 0 }
+    }
+    fn abs(self) -> Self {
+        if self.signbit() {
+            -self
+        } else {
+            self
+        }
+    }
+    fn zero() -> Self { 0.0 }
+    fn is_infinite(self) -> bool {
+        f64::is_infinite(self)
+    }
+    fn is_nan(self) -> bool {
+        f64::is_nan(self)
+    }
+    fn is_finite(self) -> bool {
+        f64::is_finite(self)
+    }
+}
+
+pub fn _assert_feq<F>(i: F, o: F, maxdiff: F, flags: u32) -> Option<String>
+where F: Float + UpperExp + Sub<F, Output=F> {
     if i.is_finite() && o.is_finite() {
         if (i == Float::zero() || o == Float::zero()) && flags & TEST_ZERO_SIGN > 0
                                     && i.signbit() != o.signbit() {
@@ -68,7 +110,6 @@ pub fn _assert_feq<F: Float + SignBit + UpperExp>(i: F, o: F, maxdiff: F, flags:
 #[macro_export]
 macro_rules! assert_feq {
     ($i:expr, $o:expr, $maxdiff:expr, $flags:expr) => ({
-        use std::num::Float;
         if let Some(msg) = _assert_feq($i, $o, $maxdiff.abs(), $flags) {
             panic!(msg)
         }

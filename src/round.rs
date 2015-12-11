@@ -4,7 +4,7 @@ use utils::{F64_SIGN_MASK, F64_MANTISSA_MASK, F64_NAN_EXP};
 
 /// Round the 32-bit floating-point number away from zero.
 #[no_mangle]
-pub extern fn roundf(i : f32) -> f32 {
+pub extern "C" fn roundf(i: f32) -> f32 {
     let mut bits = i.as_bits();
     let exp = bits.get_exponent();
 
@@ -41,7 +41,7 @@ pub extern fn roundf(i : f32) -> f32 {
 
 /// Round the 64-bit floating-point number away from zero.
 #[no_mangle]
-pub extern fn round(i : f64) -> f64 {
+pub extern "C" fn round(i: f64) -> f64 {
     // See roundf for implementation details and commentary. The code structure does not differ,
     // only the relevant constants do.
     let mut bits = i.as_bits();

@@ -3,3 +3,6 @@
 name = "math"
 version = "0.0.1"
 authors = ["Simonas Kazlauskas <git@kazlauskas.me>"]
+
+[dependencies]
+libc="0.2"

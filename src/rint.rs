@@ -12,7 +12,7 @@ use libc::{c_long, c_longlong};
 /// or set current global state such as rounding direction or error reporting and will always round
 /// away from zero.
 #[no_mangle]
-pub extern fn rintf(i : f32) -> f32 {
+pub extern "C" fn rintf(i: f32) -> f32 {
     roundf(i)
 }
 
@@ -24,7 +24,7 @@ pub extern fn rintf(i : f32) -> f32 {
 /// or set current global state such as rounding direction or error reporting and will always round
 /// away from zero.
 #[no_mangle]
-pub extern fn rint(i : f64) -> f64 {
+pub extern "C" fn rint(i: f64) -> f64 {
     round(i)
 }
 
@@ -36,7 +36,7 @@ pub extern fn rint(i : f64) -> f64 {
 /// or set current global state such as rounding direction or error reporting and will always round
 /// away from zero.
 #[no_mangle]
-pub extern fn lrintf(i : f32) -> c_long {
+pub extern "C" fn lrintf(i: f32) -> c_long {
     lroundf(i)
 }
 
@@ -48,7 +48,7 @@ pub extern fn lrintf(i : f32) -> c_long {
 /// or set current global state such as rounding direction or error reporting and will always round
 /// away from zero.
 #[no_mangle]
-pub extern fn lrint(i : f64) -> c_long {
+pub extern "C" fn lrint(i: f64) -> c_long {
     lround(i)
 }
 
@@ -60,7 +60,7 @@ pub extern fn lrint(i : f64) -> c_long {
 /// or set current global state such as rounding direction or error reporting and will always round
 /// away from zero.
 #[no_mangle]
-pub extern fn llrintf(i : f32) -> c_longlong {
+pub extern "C" fn llrintf(i: f32) -> c_longlong {
     llroundf(i)
 }
 
@@ -72,6 +72,6 @@ pub extern fn llrintf(i : f32) -> c_longlong {
 /// or set current global state such as rounding direction or error reporting and will always round
 /// away from zero.
 #[no_mangle]
-pub extern fn llrint(i : f64) -> c_longlong {
+pub extern "C" fn llrint(i: f64) -> c_longlong {
     llround(i)
 }

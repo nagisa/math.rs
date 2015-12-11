@@ -1,6 +1,4 @@
-#![feature(std_misc)]
 extern crate math;
-use std::num::Float;
 use std::{f32, f64};
 
 use math::{sqrtf, sqrt};
@@ -22,7 +20,7 @@ fn sqrt_f32() {
     assert_feq!(sqrtf(f32::INFINITY),      f32::INFINITY, 0.0, 0);
     assert_feq!(sqrtf(-1.0),              -f32::NAN,      0.0, TEST_NAN_SIGN);
     assert_feq!(sqrtf(f32::NEG_INFINITY), -f32::NAN,      0.0, TEST_NAN_SIGN);
-    assert_feq!(sqrtf(f32::MIN_VALUE),    -f32::NAN,      0.0, TEST_NAN_SIGN);
+    assert_feq!(sqrtf(f32::MIN),    -f32::NAN,      0.0, TEST_NAN_SIGN);
 }
 
 #[test]
@@ -41,7 +39,7 @@ fn sqrt_f64() {
     assert_feq!(sqrt(f64::INFINITY),      f64::INFINITY, 0.0, 0);
     assert_feq!(sqrt(-1.0),              -f64::NAN,      0.0, TEST_NAN_SIGN);
     assert_feq!(sqrt(f64::NEG_INFINITY), -f64::NAN,      0.0, TEST_NAN_SIGN);
-    assert_feq!(sqrt(f64::MIN_VALUE),    -f64::NAN,      0.0, TEST_NAN_SIGN);
+    assert_feq!(sqrt(f64::MIN),    -f64::NAN,      0.0, TEST_NAN_SIGN);
 }
 
 #[test]

@@ -24,19 +24,14 @@
 
 #![crate_name="math"]
 #![crate_type="rlib"]
+
 // Since this is package provides very basic operations, our only dependencies will be Rust’s
 // libcore.
-#![no_std]
-#![feature(core,libc)]
-
-#[macro_use]
-extern crate core;
+#![cfg_attr(not(test), no_std)]
 
 #[cfg(test)]
-#[macro_use]
-extern crate std;
+extern crate core;
 
-// TODO: This dependency should not exist. We need to know types for c_{int,long,longlong} though.
 extern crate libc;
 
 
@@ -53,7 +48,7 @@ pub use llround::*;
 pub use dim::*;
 pub use ma::*;
 // pub use fmod::*;
-//pub use remquo::*;
+// pub use remquo::*;
 
 pub use sin::{sin, sinf};
 pub use cos::{cos, cosf};
