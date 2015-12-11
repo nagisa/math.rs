@@ -37,7 +37,7 @@ impl Bits<f32> for u32 {
 
     #[inline(always)]
     fn get_exponent(self) -> i32 {
-        ((((self as u32) & F32_EXP_MASK) >> 23) as i32) - F32_MAX_EXP
+        (((self & F32_EXP_MASK) >> 23) as i32) - F32_MAX_EXP
     }
 
     #[inline(always)]
@@ -54,7 +54,7 @@ impl Bits<f64> for u64 {
 
     #[inline(always)]
     fn get_exponent(self) -> i32 {
-        ((((self as u64) & F64_EXP_MASK) >> 52) as i32) - F64_MAX_EXP
+        (((self & F64_EXP_MASK) >> 52) as i32) - F64_MAX_EXP
     }
 
     #[inline(always)]

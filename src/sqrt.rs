@@ -1,6 +1,6 @@
 use utils::{AsBits, Bits};
-use utils::{F32_NAN_EXP, F32_SIGN_MASK, F32_DENORMAL_EXP, F32_MANTISSA_MASK};
-use utils::{F64_NAN_EXP, F64_SIGN_MASK, F64_DENORMAL_EXP, F64_MANTISSA_MASK};
+use utils::{F32_NAN_EXP, F32_SIGN_MASK, F32_DENORMAL_EXP, F32_MANTISSA_MASK, F32_MAX_EXP};
+use utils::{F64_NAN_EXP, F64_SIGN_MASK, F64_DENORMAL_EXP, F64_MANTISSA_MASK, F64_MAX_EXP};
 
 /// Calculate a square root.
 #[no_mangle]
@@ -58,8 +58,8 @@ pub extern "C" fn sqrtf(i: f32) -> f32 {
             q += q & 1;
         }
     }
-    bits = ((q >> 1) + 0x3F00_0000) as u32;
-    bits += (exp as u32) << 23;
+    exp = exp + (F32_MAX_EXP - 1);
+    bits = ((q >> 1) + (exp << 23)) as u32;
     bits.from_bits()
 }
 
@@ -119,7 +119,7 @@ pub extern "C" fn sqrt(i: f64) -> f64 {
             q += q & 1;
         }
     }
-    bits = ((q >> 1) + 0x3FE0_0000_0000_0000) as u64;
-    bits += (exp as u64) << 52;
+    exp = exp + (F64_MAX_EXP - 1);
+    bits = ((q >> 1) + ((exp as i64) << 52)) as u64;
     bits.from_bits()
 }
