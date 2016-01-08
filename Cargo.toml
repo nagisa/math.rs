@@ -3,6 +3,9 @@
 name = "math"
 version = "0.0.1"
 authors = ["Simonas Kazlauskas <git@kazlauskas.me>"]
+license = "MIT/Apache-2.0"
+repository = "https://github.com/nagisa/math.rs"
+description = "Software implementations of some libm functions in Rust"
 
 [dependencies]
 libc="0.2"
