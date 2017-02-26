@@ -9,3 +9,7 @@ description = "Software implementations of some libm functions in Rust"
 
 [dependencies]
 libc="0.2"
+
+[dev-dependencies]
+quickcheck="0.4"
+libloading="0.3"
