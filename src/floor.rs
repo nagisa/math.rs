@@ -3,6 +3,7 @@ use utils::{F32_SIGN_MASK, F64_SIGN_MASK, F32_MANTISSA_MASK, F64_MANTISSA_MASK};
 
 /// Round the 32-bit floating-point number towards -∞ (negative infinity).
 #[no_mangle]
+#[inline]
 pub extern "C" fn floorf(i: f32) -> f32 {
     // Implementation is similar to roundf. Same commentary applies.
     let mut bits = i.as_bits();
@@ -33,6 +34,7 @@ pub extern "C" fn floorf(i: f32) -> f32 {
 
 /// Round the 64-bit floating-point number towards -∞ (negative infinity).
 #[no_mangle]
+#[inline]
 pub extern "C" fn floor(i: f64) -> f64 {
     // Implementation is exactly the same as floorf with constants adapted for f64.
     let mut bits = i.as_bits();

@@ -1,5 +1,7 @@
 use core::num::Float;
 
+#[no_mangle]
+#[inline]
 pub extern fn ieee754_pow64(x : f64, y: f64) -> f64 {
     // Simple cases
     if x.is_nan() {

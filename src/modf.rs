@@ -7,6 +7,7 @@ use utils::{F64_SIGN_MASK, F64_MANTISSA_MASK};
 /// Each part has the same sign as the input. Integral part is stored in the location pointed to by
 /// `o` and fractional part is returned.
 #[no_mangle]
+#[inline]
 pub extern "C" fn modff(i: f32, o: *mut f32) -> f32 {
     // Unsafes booyah!
     let mut bits = i.as_bits();
@@ -51,6 +52,7 @@ pub extern "C" fn modff(i: f32, o: *mut f32) -> f32 {
 /// Each part has the same sign as the input. Integral part is stored in the location pointed to by
 /// `o` and fractional part is returned.
 #[no_mangle]
+#[inline]
 pub extern "C" fn modf(i: f64, o: *mut f64) -> f64 {
     // Unsafes booyah!
     let mut bits = i.as_bits();

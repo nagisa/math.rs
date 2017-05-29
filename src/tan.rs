@@ -59,6 +59,8 @@ fn _ctg(i: f64) -> f64 {
 
 
 /// Calculate a tangent
+#[no_mangle]
+#[inline]
 pub extern "C" fn tan(i: f64) -> f64 {
     // If x is not finite, the function must return a NAN.
     if !i.is_finite() {
@@ -77,6 +79,8 @@ pub extern "C" fn tan(i: f64) -> f64 {
     }
 }
 
+#[no_mangle]
+#[inline]
 pub extern "C" fn tanf(i: f32) -> f32 {
     tan(i as f64) as f32
 }

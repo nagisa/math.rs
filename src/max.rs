@@ -3,6 +3,7 @@
 /// If one of the arguments is NaN, the other argument is returned.
 /// If both arguments are NaN, NaN is returned.
 #[no_mangle]
+#[inline]
 pub extern "C" fn fmaxf(l: f32, r: f32) -> f32 {
     if l >= r || r.is_nan() {
         l
@@ -16,6 +17,7 @@ pub extern "C" fn fmaxf(l: f32, r: f32) -> f32 {
 /// If one of the arguments is NaN, the other argument is returned.
 /// If both arguments are NaN, NaN is returned.
 #[no_mangle]
+#[inline]
 pub extern "C" fn fmax(l: f64, r: f64) -> f64 {
     if l >= r || r.is_nan() {
         l

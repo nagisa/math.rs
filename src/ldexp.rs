@@ -10,6 +10,7 @@ use scalbn::{scalbnf, scalbn};
 /// Note: This function does not report overflow/underflow errors like the original implementation
 /// does.
 #[no_mangle]
+#[inline]
 pub extern "C" fn ldexpf(i: f32, x: c_int) -> f32 {
     scalbnf(i, x)
 }
@@ -21,6 +22,7 @@ pub extern "C" fn ldexpf(i: f32, x: c_int) -> f32 {
 /// Note: This function does not report overflow/underflow errors like the original implementation
 /// does.
 #[no_mangle]
+#[inline]
 pub extern "C" fn ldexp(i: f64, x: c_int) -> f64 {
     scalbn(i, x)
 }

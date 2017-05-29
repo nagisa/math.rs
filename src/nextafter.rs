@@ -8,6 +8,7 @@ use utils::F64_SIGN_MASK;
 /// * If `d` > `i`, function returns smallest representable number more than `i`;
 /// * If `d` = `i`, function returns `d`.
 #[no_mangle]
+#[inline]
 pub extern "C" fn nextafterf(i: f32, d: f32) -> f32 {
     let mut ibits = i.as_bits();
     let dbits = d.as_bits();
@@ -44,6 +45,7 @@ pub extern "C" fn nextafterf(i: f32, d: f32) -> f32 {
 /// * If `d` > `i`, function returns smallest representable number more than `i`;
 /// * If `d` = `i`, function returns `d`.
 #[no_mangle]
+#[inline]
 pub extern "C" fn nextafter(i: f64, d: f64) -> f64 {
     let mut ibits = i.as_bits();
     let dbits = d.as_bits();

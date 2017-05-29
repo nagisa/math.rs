@@ -1,5 +1,6 @@
 /// Positive difference of two 32-bit floating-point numbers.
 #[no_mangle]
+#[inline]
 pub extern "C" fn fdimf(l: f32, r: f32) -> f32 {
     if l <= r {
         return 0.0;
@@ -9,6 +10,7 @@ pub extern "C" fn fdimf(l: f32, r: f32) -> f32 {
 
 /// Positive difference of two 64-bit floating-point numbers.
 #[no_mangle]
+#[inline]
 pub extern "C" fn fdim(l: f64, r: f64) -> f64 {
     if l <= r {
         return 0.0;

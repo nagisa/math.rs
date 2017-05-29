@@ -8,6 +8,7 @@ use round::{roundf, round};
 /// Note: this function behaves differently compared to libm implementation. It will not use
 /// current global state such as rounding direction and will always round away from zero.
 #[no_mangle]
+#[inline]
 pub extern "C" fn nearbyintf(i: f32) -> f32 {
     roundf(i)
 }
@@ -19,6 +20,7 @@ pub extern "C" fn nearbyintf(i: f32) -> f32 {
 /// Note: this function behaves differently compared to libm implementation. It will not use
 /// current global state such as rounding direction and will always round away from zero.
 #[no_mangle]
+#[inline]
 pub extern "C" fn nearbyint(i: f64) -> f64 {
     round(i)
 }

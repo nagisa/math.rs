@@ -3,6 +3,7 @@ use asin::asin;
 
 /// Calculate the arc cosine of an input.
 #[no_mangle]
+#[inline]
 pub extern "C" fn acos(i: f64) -> f64 {
     if i > 0.0 {
         FRAC_PI_2 - asin(i)
@@ -13,6 +14,7 @@ pub extern "C" fn acos(i: f64) -> f64 {
 
 /// Calculate the arc cosine of an input.
 #[no_mangle]
+#[inline]
 pub extern "C" fn acosf(i: f32) -> f32 {
     acos(i as f64) as f32
 }

@@ -9,6 +9,7 @@ use utils::{F32_SIGN_MASK, F64_SIGN_MASK, F32_MANTISSA_MASK, F64_MANTISSA_MASK};
 ///
 /// If the number is ∞, NaN or doesn’t fit into the result value, arbitrary value may be returned.
 #[no_mangle]
+#[inline]
 pub extern "C" fn lroundf(i: f32) -> c_long {
     let mut bits = i.as_bits();
     let exp = bits.get_exponent();
@@ -43,6 +44,7 @@ pub extern "C" fn lroundf(i: f32) -> c_long {
 ///
 /// If the number is ∞, NaN or doesn’t fit into the result value, arbitrary value may be returned.
 #[no_mangle]
+#[inline]
 pub extern "C" fn lround(i: f64) -> c_long {
     // Same thing as lroundf with constants adapted.
     let mut bits = i.as_bits();

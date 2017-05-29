@@ -7,6 +7,7 @@ use utils::F64_EXP_MASK;
 /// Calculates hypotenuse of right-angled triange with sides l and r. This is also known as a
 /// distance between points (0, 0) and (x, y).
 #[no_mangle]
+#[inline]
 pub extern "C" fn hypotf(l: f32, r: f32) -> f32 {
     let lbits = l.abs().as_bits();
     let rbits = r.abs().as_bits();
@@ -39,6 +40,7 @@ pub extern "C" fn hypotf(l: f32, r: f32) -> f32 {
 /// Calculates hypotenuse of right-angled triange with sides l and r. This is also known as a
 /// distance between points (0, 0) and (x, y).
 #[no_mangle]
+#[inline]
 pub extern "C" fn hypot(l: f64, r: f64) -> f64 {
     let lbits = l.abs().as_bits();
     let rbits = r.abs().as_bits();

@@ -10,6 +10,7 @@ pub const FP_ILOGBNAN: c_int = 0x7FFF_FFFF;
 
 /// Get exponent of a 32-bit floating-point value as an int.
 #[no_mangle]
+#[inline]
 pub extern "C" fn ilogbf(i: f32) -> c_int {
     let mut bits = i.as_bits();
     bits &= !F32_SIGN_MASK;
@@ -28,6 +29,7 @@ pub extern "C" fn ilogbf(i: f32) -> c_int {
 
 /// Get exponent of a 64-bit floating-point value as an int.
 #[no_mangle]
+#[inline]
 pub extern "C" fn ilogb(i: f64) -> c_int {
     let mut bits = i.as_bits();
     bits &= !F64_SIGN_MASK;

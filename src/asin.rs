@@ -22,6 +22,7 @@ fn r(i: f64) -> f64 {
 
 /// Calculate the arc sine of an input.
 #[no_mangle]
+#[inline]
 pub extern "C" fn asin(i: f64) -> f64 {
     const P2_HI: f64 = 1.57079632679489655800E+00;
     const P2_LO: f64 = 6.12323399573676603587E-17;
@@ -53,6 +54,7 @@ pub extern "C" fn asin(i: f64) -> f64 {
 
 /// Calculate the arc sine of an input.
 #[no_mangle]
+#[inline]
 pub extern "C" fn asinf(i: f32) -> f32 {
     asin(i as f64) as f32
 }

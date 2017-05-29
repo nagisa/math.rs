@@ -46,6 +46,7 @@ pub fn _sin(i: f64) -> f64 {
 
 /// Calculate the sine of an input.
 #[no_mangle]
+#[inline]
 pub extern "C" fn sin(mut i: f64) -> f64 {
     // If x is not finite, the function must return a NAN.
     if !i.is_finite() {
@@ -76,6 +77,7 @@ pub extern "C" fn sin(mut i: f64) -> f64 {
 
 /// Calculate the sine of an input.
 #[no_mangle]
+#[inline]
 pub extern "C" fn sinf(i: f32) -> f32 {
     sin(i as f64) as f32
 }

@@ -14,6 +14,7 @@ const F64_TWOM54: f64 = 5.55111512312578270212e-17; // 0x3C90_0000_0000_0000
 
 /// Multiply the 32-bit floating-point number by integral power of radix.
 #[no_mangle]
+#[inline]
 pub extern "C" fn scalblnf(i: f32, x: c_long) -> f32 {
     let mut bits = i.as_bits();
     let exp = bits.get_exponent();
@@ -50,6 +51,7 @@ pub extern "C" fn scalblnf(i: f32, x: c_long) -> f32 {
 
 /// Multiply the 64-bit floating-point number by integral power of radix.
 #[no_mangle]
+#[inline]
 pub extern "C" fn scalbln(i: f64, x: c_long) -> f64 {
     let mut bits = i.as_bits();
     let exp = bits.get_exponent();

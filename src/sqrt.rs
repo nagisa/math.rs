@@ -4,6 +4,7 @@ use utils::{F64_NAN_EXP, F64_SIGN_MASK, F64_DENORMAL_EXP, F64_MANTISSA_MASK, F64
 
 /// Calculate a square root.
 #[no_mangle]
+#[inline]
 pub extern "C" fn sqrtf(i: f32) -> f32 {
     let mut bits = i.as_bits();
     let mut exp = bits.get_exponent();
@@ -65,6 +66,7 @@ pub extern "C" fn sqrtf(i: f32) -> f32 {
 
 /// Calculate a square root.
 #[no_mangle]
+#[inline]
 pub extern "C" fn sqrt(i: f64) -> f64 {
     let mut bits = i.as_bits();
     let mut exp = bits.get_exponent();

@@ -3,6 +3,7 @@ use utils::{F32_SIGN_MASK, F64_SIGN_MASK, F32_MANTISSA_MASK, F64_MANTISSA_MASK};
 
 /// Truncate the 32-bit floating-point number to nearest integral value not larger than the number.
 #[no_mangle]
+#[inline]
 pub extern "C" fn truncf(i: f32) -> f32 {
     let mut bits = i.as_bits();
     let exp = bits.get_exponent();
@@ -23,6 +24,7 @@ pub extern "C" fn truncf(i: f32) -> f32 {
 
 /// Truncate the 64-bit floating-point number to nearest integral value not larger than the number.
 #[no_mangle]
+#[inline]
 pub extern "C" fn trunc(i: f64) -> f64 {
     let mut bits = i.as_bits();
     let exp = bits.get_exponent();
