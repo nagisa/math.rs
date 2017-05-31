@@ -1,6 +1,6 @@
 use core::{f32, f64};
 // TODO: remove this
-use libc::c_long;
+use cty::c_long;
 
 use utils::{AsBits, Bits};
 use utils::{F32_SIGN_MASK, F32_EXP_MASK, F32_MAX_EXP, F32_MIN_EXP, F32_DENORMAL_EXP, F32_NAN_EXP};

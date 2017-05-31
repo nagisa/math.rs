@@ -27,13 +27,9 @@
 
 // Since this is package provides very basic operations, our only dependencies will be Rust’s
 // libcore.
-#![cfg_attr(not(test), no_std)]
+#![no_std]
 
-#[cfg(test)]
-extern crate core;
-
-extern crate libc;
-
+extern crate cty;
 
 // Reexport everything
 pub use abs::*;

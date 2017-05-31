@@ -1,3 +1,6 @@
+#[cfg(not(test))]
+use utils::Float;
+
 /// Returns the bigger of two 32-bit floating point numbers.
 ///
 /// If one of the arguments is NaN, the other argument is returned.

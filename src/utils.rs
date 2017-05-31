@@ -1,4 +1,7 @@
 use core::intrinsics::transmute;
+use core::{f32, f64};
+use sqrt;
+use abs;
 
 // Define convenience wrappers converting to and from our working representation, which is bits.
 pub trait AsBits<Output> {
@@ -13,6 +16,33 @@ pub trait Bits<Output> {
     fn get_exponent(self) -> i32;
     /// Chekcs whether represents ±0 float
     fn is_zero(self) -> bool;
+}
+
+// Similar to unstable `core::num::Float`, needed due the lack of `std`
+pub trait Float: Sized + PartialEq {
+    /// Returns `true` if the number is NaN.
+    #[inline(always)]
+    fn is_nan(&self) -> bool {
+        self != self
+    }
+
+    /// Returns `true` if the number is neither infinite or NaN.
+    #[inline(always)]
+    fn is_finite(self) -> bool {
+        !(self.is_nan() || self.is_infinite())
+    }
+
+    /// Returns `true` if the number is infinite.
+    fn is_infinite(self) -> bool;
+
+    /// Take the reciprocal (inverse) of a number, `1/x`.
+    fn recip(self) -> Self;
+
+    /// Calculate a square root.
+    fn sqrt(self) -> Self;
+
+    /// Take the absolute value of a number.
+    fn abs(self) -> Self;
 }
 
 impl AsBits<u32> for f32 {
@@ -60,6 +90,58 @@ impl Bits<f64> for u64 {
     #[inline(always)]
     fn is_zero(self) -> bool {
         self & !F64_SIGN_MASK == 0
+    }
+}
+
+impl Float for f32 {
+    /// Returns `true` if the number is infinite.
+    #[inline(always)]
+    fn is_infinite(self) -> bool {
+        self == f32::INFINITY || self == f32::NEG_INFINITY
+    }
+
+    /// Take the reciprocal (inverse) of a number, `1/x`.
+    #[inline(always)]
+    fn recip(self) -> Self {
+        1.0f32 / self
+    }
+
+    /// Calculate a square root.
+    #[inline(always)]
+    fn sqrt(self) -> Self {
+        sqrt::sqrtf(self)
+    }
+
+    /// Take the absolute value of a number.
+    #[inline(always)]
+    fn abs(self) -> Self {
+        abs::fabsf(self)
+    }
+}
+
+impl Float for f64 {
+    /// Returns `true` if the number is infinite.
+    #[inline(always)]
+    fn is_infinite(self) -> bool {
+        self == f64::INFINITY || self == f64::NEG_INFINITY
+    }
+
+    /// Take the reciprocal (inverse) of a number, `1/x`.
+    #[inline(always)]
+    fn recip(self) -> Self {
+        1.0f64 / self
+    }
+
+    /// Calculate a square root.
+    #[inline(always)]
+    fn sqrt(self) -> Self {
+        sqrt::sqrt(self)
+    }
+
+    /// Take the absolute value of a number.
+    #[inline(always)]
+    fn abs(self) -> Self {
+        abs::fabs(self)
     }
 }
 

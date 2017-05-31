@@ -1,4 +1,4 @@
-use libc::c_int;
+use cty::c_int;
 
 use utils::{AsBits, Bits};
 use utils::{F32_SIGN_MASK, F64_SIGN_MASK};

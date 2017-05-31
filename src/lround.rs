@@ -1,6 +1,6 @@
 use core::mem::size_of;
 // TODO: this needs to be gotten rid of
-use libc::c_long;
+use cty::c_long;
 
 use utils::{AsBits, Bits};
 use utils::{F32_SIGN_MASK, F64_SIGN_MASK, F32_MANTISSA_MASK, F64_MANTISSA_MASK};

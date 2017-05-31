@@ -2,6 +2,9 @@ use utils::AsBits;
 use utils::F32_EXP_MASK;
 use utils::F64_EXP_MASK;
 
+#[cfg(not(test))]
+use utils::Float;
+
 /// Euclidean distance function. 32-bit floating-point version.
 ///
 /// Calculates hypotenuse of right-angled triange with sides l and r. This is also known as a

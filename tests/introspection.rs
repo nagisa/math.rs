@@ -1,7 +1,7 @@
 extern crate math;
 extern crate libloading;
 extern crate quickcheck;
-extern crate libc;
+extern crate cty;
 
 #[macro_use]
 mod testutils;
@@ -27,7 +27,7 @@ check!(logb ~ |x: f64| -> f64 {
     (f64::NAN), (f64::INFINITY), (f64::NEG_INFINITY)
 ]);
 
-check!(ilogbf ~ |x: f32| -> libc::c_int {
+check!(ilogbf ~ |x: f32| -> cty::c_int {
     math::ilogbf(x)
 },
 [
@@ -36,7 +36,7 @@ check!(ilogbf ~ |x: f32| -> libc::c_int {
     (f32::NAN), (f32::INFINITY), (f32::NEG_INFINITY)
 ]);
 
-check!(ilogb ~ |x: f64| -> libc::c_int {
+check!(ilogb ~ |x: f64| -> cty::c_int {
     math::ilogb(x)
 },
 [
@@ -45,7 +45,7 @@ check!(ilogb ~ |x: f64| -> libc::c_int {
     (f64::NAN), (f64::INFINITY), (f64::NEG_INFINITY)
 ]);
 
-check!(scalbnf ~ |x: f32, y: libc::c_int| -> f32 {
+check!(scalbnf ~ |x: f32, y: cty::c_int| -> f32 {
     math::scalbnf(x, y)
 },
 [
@@ -59,7 +59,7 @@ check!(scalbnf ~ |x: f32, y: libc::c_int| -> f32 {
     (f32::NAN, 100), (f32::INFINITY, -100), (f32::NEG_INFINITY, 100), (1.0, 128), (-1.0, 128)
 ]);
 
-check!(scalbn ~ |x: f64, y: libc::c_int| -> f64 {
+check!(scalbn ~ |x: f64, y: cty::c_int| -> f64 {
     math::scalbn(x, y)
 },
 [

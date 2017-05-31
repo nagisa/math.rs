@@ -2,7 +2,7 @@
 use round::{roundf, round};
 use lround::{lroundf, lround};
 use llround::{llroundf, llround};
-use libc::{c_long, c_longlong};
+use cty::{c_long, c_longlong};
 
 /// Round the 32-bit floating-point number away from zero.
 ///

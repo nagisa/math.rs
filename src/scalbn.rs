@@ -1,5 +1,5 @@
 // TODO: remove this
-use libc::{c_int, c_long};
+use cty::{c_int, c_long};
 
 use scalbln::{scalblnf, scalbln};
 

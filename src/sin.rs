@@ -21,6 +21,8 @@ use utils::{FRAC_3PI_4, FRAC_5PI_4, FRAC_3PI_2, FRAC_7PI_4, PI_2};
 use copysign::copysign;
 use cos::_cos;
 
+#[cfg(not(test))]
+use utils::Float;
 
 pub fn _sin(i: f64) -> f64 {
     // We will use order 13 Taylor series for the sine – this gives us about 6-7 digits of

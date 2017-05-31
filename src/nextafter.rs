@@ -2,6 +2,9 @@ use utils::{AsBits, Bits};
 use utils::F32_SIGN_MASK;
 use utils::F64_SIGN_MASK;
 
+#[cfg(not(test))]
+use utils::Float;
+
 /// Calculate next representable floating-point value following `i` in direction of `d`
 ///
 /// * If `d` < `i`, function returns largest representable number less than `i`;

@@ -4,6 +4,9 @@ use core::f64::consts::FRAC_PI_2;
 use utils::{AsBits, Bits};
 use copysign::copysign;
 
+#[cfg(not(test))]
+use utils::Float;
+
 fn r(i: f64) -> f64 {
     const P0: f64 = 1.66666666666666657415E-01;
     const P1: f64 = -3.25565818622400915405E-01;

@@ -10,6 +10,9 @@ use core::f64::consts::{PI, FRAC_PI_2, FRAC_PI_4};
 use utils::FRAC_3PI_4;
 use copysign::copysign;
 
+#[cfg(not(test))]
+use utils::Float;
+
 fn _tan(i: f64) -> f64 {
     // Taylor series for tan(x) look like this:
     //

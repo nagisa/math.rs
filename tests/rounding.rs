@@ -1,7 +1,7 @@
 extern crate math;
 extern crate libloading;
 extern crate quickcheck;
-extern crate libc;
+extern crate cty;
 
 use std::{f32, f64};
 use testutils::*;
@@ -119,22 +119,22 @@ check!(trunc ~ |x: f64| -> f64 {
     ( f64::NAN), (-f64::NAN)
 ]);
 
-check!(lroundf ~ |x: f32| -> libc::c_long {
+check!(lroundf ~ |x: f32| -> cty::c_long {
     math::lroundf(x)
 },
 [(0.0), (1.0), (1.6), (-1.5), (-1.4), (-0.01), (2147483647.0)]);
 
-check!(lround ~ |x: f64| -> libc::c_long {
+check!(lround ~ |x: f64| -> cty::c_long {
     math::lround(x)
 },
 [(0.0), (1.0), (1.6), (-1.5), (-1.4), (-0.01), (2147483647.0)]);
 
-check!(llroundf ~ |x: f32| -> libc::c_longlong {
+check!(llroundf ~ |x: f32| -> cty::c_longlong {
     math::llroundf(x)
 },
 [(0.0), (1.0), (1.6), (-1.5), (-1.4), (-0.01), (2147483647.0)]);
 
-check!(llround ~ |x: f64| -> libc::c_long {
+check!(llround ~ |x: f64| -> cty::c_long {
     math::llround(x)
 },
 [(0.0), (1.0), (1.6), (-1.5), (-1.4), (-0.01), (2147483647.0)]);
