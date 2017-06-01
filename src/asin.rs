@@ -4,7 +4,6 @@ use core::f64::consts::FRAC_PI_2;
 use utils::{AsBits, Bits};
 use copysign::copysign;
 
-#[cfg(not(test))]
 use utils::Float;
 
 fn r(i: f64) -> f64 {

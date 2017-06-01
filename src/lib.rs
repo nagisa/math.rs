@@ -29,6 +29,9 @@
 // libcore.
 #![no_std]
 
+// Do not try use library itself for tests. It does not cope well with libstd.
+#![cfg(not(test))]
+
 extern crate cty;
 
 // Reexport everything

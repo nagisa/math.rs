@@ -2,7 +2,6 @@ use utils::AsBits;
 use utils::F32_EXP_MASK;
 use utils::F64_EXP_MASK;
 
-#[cfg(not(test))]
 use utils::Float;
 
 /// Euclidean distance function. 32-bit floating-point version.

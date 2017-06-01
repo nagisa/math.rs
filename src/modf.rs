@@ -2,7 +2,6 @@ use utils::{AsBits, Bits};
 use utils::{F32_SIGN_MASK, F32_MANTISSA_MASK};
 use utils::{F64_SIGN_MASK, F64_MANTISSA_MASK};
 
-#[cfg(not(test))]
 use utils::Float;
 
 /// Extract signed integral and fractional values of of 32-bit floating-point number.

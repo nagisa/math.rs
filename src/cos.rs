@@ -6,7 +6,6 @@ use core::f64::consts::{PI, FRAC_PI_2, FRAC_PI_4};
 use utils::{FRAC_3PI_4, FRAC_5PI_4, FRAC_3PI_2, FRAC_7PI_4, PI_2};
 use sin::_sin;
 
-#[cfg(not(test))]
 use utils::Float;
 
 pub fn _cos(i: f64) -> f64 {

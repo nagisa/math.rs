@@ -1,4 +1,3 @@
-#[cfg(not(test))]
 use utils::Float;
 
 /// Returns the smaller of two 32-bit floating point numbers.

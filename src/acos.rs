@@ -1,7 +1,6 @@
 use core::f64::consts::FRAC_PI_2;
 use asin::asin;
 
-#[cfg(not(test))]
 use utils::Float;
 
 /// Calculate the arc cosine of an input.
